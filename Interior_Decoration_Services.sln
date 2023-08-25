@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interior_Decoration_Services", "Interior_Decoration_Services\Interior_Decoration_Services.csproj", "{B14C6BBC-2F2E-40D5-B4FD-84DE7C410455}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B14C6BBC-2F2E-40D5-B4FD-84DE7C410455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14C6BBC-2F2E-40D5-B4FD-84DE7C410455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14C6BBC-2F2E-40D5-B4FD-84DE7C410455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14C6BBC-2F2E-40D5-B4FD-84DE7C410455}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C080F9D-C959-4571-9682-A6FEE2737F30}
+	EndGlobalSection
+EndGlobal

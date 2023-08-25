@@ -1,0 +1,5 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+@await Component.InvokeAsync("ShowProductByGroupComponent",Model)

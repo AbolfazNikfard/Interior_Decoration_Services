@@ -1,0 +1,66 @@
+﻿using Interior_Decoration_Services.Models;
+using Microsoft.AspNetCore.Identity;
+
+namespace Interior_Decoration_Services.Data
+{
+    public class Database_Initializer
+    {
+        public static void Seed(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.GetRequiredService<IServiceProvider>()
+                .CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ProjectContext>();
+                if (context != null)
+                {
+                    User user = null;
+                    IdentityRole admin = null;
+                    if (context.Users != null && !context.Users.Any())
+                    {
+                        user = new User()
+                        {
+                            PasswordHash =
+                                "AQAAAAEAACcQAAAAEE5W8z3JXjlDAENV/mrcVLZ8rlmSq3FzpNfatgjigHhfrvQPEMIjQRLNUYED5Nt9rQ==",
+                            Name = "ابوالفضل",
+                            Family = "نیک فرد",
+                            UserName = "Admin@gmail.com",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            Email = "Admin@gmail.com",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            EmailConfirmed = true,
+                        };
+                        context.Users.Add(user);
+                    }
+                    if (context.Roles != null && !context.Roles.Any())
+                    {
+                        admin = new IdentityRole()
+                        {
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        };
+                        var role = new List<IdentityRole>()
+                        {
+                            new IdentityRole()
+                            {
+                                Name = "Buyer",
+                                NormalizedName = "BUYER"
+                            },
+                        };
+                        context.AddRange(role);
+                        context.Add(admin);
+                    }
+
+                    if (user != null && admin != null)
+                    {
+                        context.UserRoles.Add(new IdentityUserRole<string>()
+                        {
+                            RoleId = admin.Id,
+                            UserId = user.Id
+                        });
+                    }
+                    context.SaveChanges();
+                }
+            }
+        }
+    }
+}

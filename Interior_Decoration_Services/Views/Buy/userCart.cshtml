@@ -1,0 +1,256 @@
+﻿@model List<CartViewModel>
+@{
+    ViewData["Title"] = "لیست سفارشات";
+}
+<!--section start-->
+<section class="cart-section section-b-space cmn_bg_yellow">
+
+    <ul class="plus_decore">
+        <li></li>
+        <li></li>
+    </ul>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                @if (Model.Count != 0)
+                {
+                    <table class="table cart-table table-responsive-sm">
+                        <thead>
+                            <tr class="table-head">
+                                <th scope="col">شناسه</th>
+                                <th scope="col">تصویر</th>
+                                <th scope="col">نام محصول</th>
+                                <th scope="col">رنگ</th>
+                                <th scope="col">جنس</th>
+                                <th scope="col">اقدام</th>
+                                <th scope="col">وضعیت</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@item.productId</td>
+                                    <td>
+                                        <a href="/Product/ProductDetails?productId=@(item.productId)">
+                                            <img src="~/assets/images/product-image/@(item.productImage)" alt="ProductImage">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span href="#">@item.productName</span>
+                                        @*<div class="mobile-cart-content row">
+                                <div class="col-xs-3">
+                                <div class="qty-box">
+                                <div class="input-group">
+                                <input type="text" name="quantity" class="form-control input-number" value="1">
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-xs-3">
+                                <h2 class="td-color">63000تومان</h2>
+                                </div>
+                                <div class="col-xs-3">
+                                <h2 class="td-color"><a href="#" class="icon"><i class="fa fa-times" aria-hidden="true"></i></a></h2>
+                                </div>
+                                </div>*@
+                                    </td>
+                                    <td>
+                                        @if (item.productColor != null)
+                                        {
+                                            <span>@item.productColor</span>
+                                        }
+                                        else
+                                        {
+                                            <span></span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.productMaterial != null)
+                                        {
+                                            <span>@item.productMaterial</span>
+                                        }
+                                        else
+                                        {
+                                            <span></span>
+                                        }
+                                        @* <div class="qty-box">
+                                <div class="input-group">
+                                <input type="number" name="quantity" class="form-control input-number" value="1">
+                                </div>
+                                </div>*@
+                                    </td>
+                                    <td><a href="/Buy/deleteItemFromCart?productId=@(item.productId)" class="icon"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                                    <td>
+                                        @if (item.ProductStat == ProductStatus.Pending)
+                                        {
+                                            <span style="color:gray">در حال بررسی</span>
+                                        }
+                                        else if (item.ProductStat == ProductStatus.Accept)
+                                        {
+                                            <span style="color:green">درخواست تایید شده منتظر ارسال سرویس کار بمانید</span>
+                                        }
+                                        else
+                                        {
+                                            <span style="color:red">رد شده</span>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <h6 style="text-align:center;">سفارشی وجود ندارد</h6>
+                }
+            </div>
+        </div>
+        @*<div class="row cart-buttons">
+        <div class="col-sm-6">
+        <a class="theme_btn rtl_r" href="#">
+        ادامه خرید
+        <span class="theme_btn_eff"></span>
+        </a>
+        </div>
+        <div class="col-sm-6">
+        <a class="theme_btn" href="#">
+        پرداخت
+        <span class="theme_btn_eff"></span>
+        </a>
+        </div>
+        </div>*@
+    </div>
+</section>
+<!--section end-->
+@*@{
+    var Total = 0;
+    int anyResault;
+    ulong TotalPrice = 0;
+    ulong TotalEachRow, ShowReadablePrice;
+}*@
+<!-- Ec breadcrumb start -->
+@*<div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row ec_breadcrumb_inner">
+                    <div class="col-md-6 col-sm-12">
+                        <h2 class="ec-breadcrumb-title">سبد خرید</h2>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <!-- ec-breadcrumb-list start -->
+                        <ul class="ec-breadcrumb-list">
+                        </ul>
+                        <!-- ec-breadcrumb-list end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ec breadcrumb end -->
+<!-- Ec cart page -->
+<section class="ec-page-content section-space-p">
+    <div class="container">
+        <div class="row">
+            <div class="ec-cart-leftside col-lg-8 col-md-12 ">
+                <!-- cart content Start -->
+                <div class="ec-cart-content">
+                    <div class="ec-cart-inner">
+                        <div class="row">
+                            @if (Model.Count == 0)
+                            {
+                                <h4>سبد خرید شما خالی است</h4>
+                            }
+                            else
+                            {
+                                <form asp-controller="Buy" asp-action="UserCart" method="post">
+                                    <div class="table-content cart-table-content">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>شناسه محصول</th>
+                                                    <th>نام محصول</th>
+                                                    <th style="text-align: center;">تعداد</th>
+                                                    <th>قیمت</th>
+                                                    <th>کل</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (int i = 0; i < Model.Count; i++)
+                                                {
+                                                    <input asp-for="@(Model[i].productId)" type="hidden" />
+                                                    <tr>
+                                                        <td class="ec-cart-pro-price">@Model[i].productId</td>
+
+                                                        <td data-label="Product" class="ec-cart-pro-name"><a href="#"><img class="ec-cart-pro-img mr-4" src="~/assets/images/product-image/@(Model[i].productImage)" alt="عکس محصول">@(Model[i].productName)</a></td>
+                                                        <input asp-for="@(Model[i].productName)" type="hidden" />
+                                                        <input asp-for="@(Model[i].productImage)" type="hidden" />
+
+                                                        <td>
+                                                            <div class="cart-qty-plus-minus">
+                                                                <input asp-for="@(Model[i].selectedNumberOfProducts)" type="text" maxlength="2" value="@Model[i].selectedNumberOfProducts">
+                                                                <div class="ec_cart_qtybtn">
+                                                                    <div class="inc ec_qtybtn">+</div>
+                                                                    <div class="dec ec_qtybtn">-</div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        @{
+                                                            ShowReadablePrice = (ulong)Model[i].productPrice;
+                                                        }
+                                                        <td data-label="Price" class="ec-cart-pro-price"><span class="amount">@(ShowReadablePrice.ToMoreReadable()) تومان </span></td>
+                                                        <input asp-for="@(Model[i].productPrice)" type="hidden" />
+                                                        @if (int.TryParse(Model[i].selectedNumberOfProducts, out anyResault) == true)
+                                                        {
+                                                            TotalEachRow = (ulong)(Model[i].productPrice) * (ulong)(int.Parse(Model[i].selectedNumberOfProducts));
+                                                            <td data-label="Total" class="ec-cart-pro-subtotal">
+                                                                @TotalEachRow.ToMoreReadable() تومان
+                                                            </td>
+
+                                                            TotalPrice += TotalEachRow;
+                                                        }
+                                                        else
+                                                        {
+                                                            <td data-label="Total" class="ec-cart-pro-subtotal"> 0 تومان</td>
+                                                        }
+                                                        <td data-label="Remove" class="ec-cart-pro-remove">
+                                                            <a asp-controller="Buy" asp-action="deleteItemFromCart" asp-route-productId="@(Model[i].productId)"><i class="ecicon eci-trash-o"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                <tr>
+                                                    <td class="ec-cart-pro-price">جمع کل</td>
+                                                    <td class="ec-cart-pro-name"></td>
+                                                    <td class="ec-cart-pro-price"></td>
+                                                    <td class="ec-cart-pro-qty" style="text-align: center;"></td>
+                                                    <td class="ec-cart-pro-subtotal">@TotalPrice.ToMoreReadable() تومان </td>
+                                                    <td class="ec-cart-pro-remove">
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="ec-cart-update-bottom">
+                                                <button asp-route-forPurchase="true" class="btn btn-primary" type="submit" style="background-color:green">پرداخت و تکمیل خرید </button>
+                                                <button asp-route-forPurchase="false" class="btn btn-primary" type="submit">به روزرسانی </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!--cart content End -->
+            </div>
+        </div>
+    </div>
+</section>
+
+*@

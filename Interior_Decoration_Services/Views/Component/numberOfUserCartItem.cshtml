@@ -1,0 +1,9 @@
+﻿@if (ViewData["ForWhere"].Equals("header"))
+{
+    <b class="ec-header-count ec-cart-count">@ViewData["NumberOfCartItem"]</b>
+}
+else
+{
+    <span class="ec-header-count ec-cart-count">@ViewData["NumberOfCartItem"]</span>
+}
+

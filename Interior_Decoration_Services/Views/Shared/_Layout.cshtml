@@ -1,0 +1,496 @@
+﻿@inject SignInManager<User> SignInManager
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="author" content="pixelstrap">
+    <meta name="description" content="OIDS | Online Interior Decoration Service">
+    <meta name="keywords" content="OIDS | Online Interior Decoration Service">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Site Title -->
+    <title>خدمات دکوراسیون داخلی آنلاین</title>
+
+    <!-- Fav icon -->
+    <link rel="shortcut icon" href="~/assets/images/ecommerce/Favicon.png">
+
+    <!-- Font Family-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    
+    <!-- Themify icon -->
+    <link rel="stylesheet" href="~/assets/css/themify.css">
+
+    <!-- Flat icon icon -->
+    <link rel="stylesheet" href="~/assets/css/flaticon.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.css">
+
+    <!-- Animation CSS -->
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/aos.css">
+
+    <!-- Owl carousel css-->
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slick-theme.css">
+
+    <!-- zoom css-->
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+
+    <!-- Style css-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/color5.css" media="screen" id="color">
+
+    <link rel="stylesheet" href="~/assets/css/message-box.css">
+
+
+</head>
+
+<body class="rtl">
+
+    <div class="ecommerce-layout">
+
+        <!--Top-Section-->
+        <div class="top-contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="top-content">
+                            <ul>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i>36666666 (+051)</li>
+                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i>anything@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="top-social">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End-Top-Section-->
+
+        <div class="main-header">
+
+            <!-- Logo & Btn Section Start -->
+            <div class="mid-header">
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-3">
+                            <a href="ecommerce.html" class="brand-logo"><img src="~/assets/images/ecommerce/WebsiteLogo.png" alt="logo"></a>
+                        </div>
+                        <div class="col-9">
+                            <div class="nav-section">
+                                <nav id="main-nav">
+                                    <div class="toggle-nav">
+                                        <i class="fa fa-bars sidebar-bar"></i>
+                                    </div>
+                                    <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+                                        <li>
+                                            <div class="mobile-back text-right">بازگشت<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
+                                        </li>
+                                        <li>
+                                            <a href="/">خانه</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">خدمات</a>
+                                            <ul>
+                                                <li class="nav-item"><a class="nav-link" href="shop-page.html">صفحه فروشگاه</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="product-page.html">صفحه محصول</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="shopping-cart.html">سبد خرید</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="shopping-wishlist.html">لیست علاقه مندی ها</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="order-success.html">موفقیت سفارش</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="checkout.html">پرداخت</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="register.html">ثبت نام</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="login.html">ورود</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">صفحات</a>
+                                            <ul>
+                                                <li class="nav-item"><a class="nav-link" href="about-us.html">درباره</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="our-service.html">خدمات</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="/Home/Team">تیم خدمات</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="/Home/ContactUs">تماس با ما</a></li>
+                                                @*<li class="nav-item"><a class="nav-link" href="404-page.html">صفحه 404</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="cooming-soon.html">به زودی</a></li>*@
+                                            </ul>
+                                        </li>
+                                        <li class="mega">
+                                            <a href="#">دسته بندی</a>
+                                            <ul class="mega-menu full-mega-menu">
+                                                <li>
+                                                    <div class="container">
+                                                        <div class="row">
+                                                           @await Component.InvokeAsync("ShowGroups","Navbar")
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">وبلاگ</a>
+                                            <ul>
+                                                <li class="nav-item"><a class="nav-link" href="blog.html">وبلاگ لیستی</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="blog-details.html">جزئیات وبلاگ</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="blogs-leftside.html">نوارکناری چپ</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="blogs-rightside.html">نوارکناری راست</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="blog-details-left-sidebar.html">جزئیات با نوارکناری چپ</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="blog-details-right-sidebar.html">جزئیات با نوارکناری راست</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">نمونه کار ها</a>
+                                        </li>
+                                       @* <li>
+                                            <a href="#">تیم خدمات</a>
+                                            <ul>
+                                                <li class="nav-item"><a class="nav-link" href="single-portfolio.html">نمونه کار تنها</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="portfolio-3-grid.html">نمونه کار - 3 - گرید</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="portfolio-4-grid.html">نمونه کار - 4 - گرید</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="masonary-3-grid.html">مسونری - 3 - گرید</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="masonary-4-grid.html">مسونری - 4 - گرید</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="masonary-fullwidth.html">مسونری - تمام عرض</a></li>
+                                            </ul>
+                                        </li>*@
+
+                                    </ul>
+                                </nav>
+                            </div>
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Buyer"))
+                            {
+                                <div class="cart-box">
+                                    <i class="ti-shopping-cart-full"></i>
+                                    <div class="logo_content">
+                                        <h5 class="title">سفارشات</h5>
+                                        <span>@await Component.InvokeAsync("numberOFUserCartItemComponent","header") عدد</span>
+                                    </div>
+                                    @*<ul class="shopping-cart">
+                                    <li>
+                                        <div class="media">
+                                            <a href="#"><img class="mr-3" src="~/assets/images/ecommerce/Product/1.jpg" alt="تصویر عمومی"></a>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <h5>نام آیتم</h5>
+                                                </a>
+                                                <h5><span>1 × 10000 تومان</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+                                    </li>
+                                    <li>
+                                        <div class="media">
+                                            <a href="#"><img class="mr-3" src="~/assets/images/ecommerce/Product/2.jpg" alt="تصویر عمومی"></a>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <h5>نام آیتم</h5>
+                                                </a>
+                                                <h5><span>1 × 10000 تومان</span></h5>
+                                            </div>
+                                        </div>
+                                        <div class="close-circle"><a href="#"><i class="fa fa-times" aria-hidden="true"></i></a></div>
+                                    </li>
+                                    <li>
+                                        <div class="total">
+                                            <h5>جمع جزء : <span>20000 تومان</span></h5>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="buttons"><a href="shopping-cart.html" class="view-cart">سبد خرید</a> <a href="#" class="checkout">پرداخت</a></div>
+                                    </li>
+                                </ul>*@
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logo & Btn Section End -->
+
+            <div class="bottom-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 ecommerce-sidebar set-order-2">
+                            <button class="btn btn-block btn_inverse toggle-btn">
+                                <i class="fa fa-bars"></i>فروشگاه بر اساس طبقه بندی
+                            </button>
+                        </div>
+                        <div class="col-md-9 set-order-1">
+                            <div class="ecommerce-from">
+                                <div class="input-group">
+                                    <input id="search_input" type="text" class="form-control" placeholder="جستجو محصولات......">
+                                    @*<div class="input-group-append selective">
+                                        <select name="collection" id="collection-option" data-option="collection-option" class="single-option-selector">
+                                            <option value="all">تمام گروه ها</option>
+                                            <option value="cleaner">پاک کننده</option>
+                                            <option value="electronics">التکرونیکی</option>
+                                            <option value="fashion">مد روز</option>
+                                            <option value="grocery">خواربار</option>
+                                            <option value="plumbing">لوله کشی</option>
+                                            <option value="sports">ورزشی</option>
+                                            <option value="tools">ابزارها</option>
+                                        </select>
+                                    </div>*@
+                                    <div class="input-group-append">
+                                        <button id="search_button" class="btn btn_inverse"> جستجو <i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            @if(SignInManager.IsSignedIn(User))
+                            {
+                                <form asp-controller="Account" asp-action="LogOut" method="post">
+                                    <button class="btn btn_white" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i>خروج</button>
+                                </form>
+                            }
+                            else
+                            {
+                            <a class="btn btn_white" href="Account/login"><i class="fa fa-user-o"></i>ورود</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+
+    @{
+        #region Footer
+    }
+    <!-- Footer Start -->
+    <footer class="footer-ecommerce">
+        <div class="upper-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer_first">
+                            <div class="footer-title mobile-title">
+                                <h3>درباره ما</h3>
+                            </div>
+                            <div class="footer-contant">
+                                <img src="~/assets/images/ecommerce/DarkWebsiteLogo.png" class="foot_logo" alt="">
+                                <p>لورم ایپسوم به راحتی متن چاپ و صنعت تایپ تنظیم می کند.</p>
+                                <div class="footer_social">
+                                    <div>
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer_second">
+                            <div>
+                                <div class="footer-title">
+                                    <h3>حساب من</h3>
+                                </div>
+                                <div class="footer-contant">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>لیست علاقه مندی ها</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>تی و سی</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>نکات حقوقی</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>تماس با ما</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>جزئیات وبلاگ</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer_second">
+                            <div>
+                                <div class="footer-title">
+                                    <h3>اطلاعات</h3>
+                                </div>
+                                <div class="footer-contant">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>تمام مجموعه</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>تحویل</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>توجه جستجو</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>بهترین فروشنده</a></li>
+                                        <li><a href="#"><i class="fa fa-chevron-circle-right"></i>محصول جدید</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer_forth">
+                            <div class="footer-title">
+                                <h3>اطلاعات</h3>
+                            </div>
+                            <div class="footer-contant">
+                                <ul>
+                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>مد پا نسخه ی نمایشی فروشگاه نسخه ی نمایشی فروشگاه 3654123</li>
+                                    <li><i class="fa fa-phone" aria-hidden="true"></i>تماس با ما: 123-456-7898</li>
+                                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i>ایمیل به ما: Support@test.com</li>
+                                    <li><i class="fa fa-fax" aria-hidden="true"></i>فکس: 123456</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright section Start -->
+        <section class="copyright_sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="cop_p">
+                            <p>2018 - 19 کپی رایت توسط راست چین بومی سازی توسط آرش خادملو</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="copy_link">
+                            <ul>
+                                <li><a href="#">شرایط و ضوابط</a></li>
+                                <li><a href="#">حریم خصوصی</a></li>
+                                <li><a href="#">تماس با ما</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Copyright section End -->
+    </footer>
+    <!-- Footer End -->
+    <!-- Tap on Top -->
+    <div class="tap-top top-cls top_5">
+        <div>
+            <i class="fa fa-angle-double-up"></i>
+        </div>
+    </div>
+    <!-- Tap on Ends -->
+    <!-- Quick-view modal popup start-->
+    <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content quick-view-modal">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row">
+                        <div class="col-lg-6 col-xs-12">
+                            <div class="quick-view-img">
+                                <img src="~/assets/images/pro/9.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 rtl-text">
+                            <div class="product-right">
+                                <h2>دریل چکشی</h2>
+                                <h3>32000 تومان</h3>
+                                <div class="border-product">
+                                    <h6 class="product-title">جزئیات محصول</h6>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                                </div>
+                                <div class="product-description border-product">
+                                    <div class="size-box">
+                                        <ul>
+                                            <li class="active"><a href="#">s</a></li>
+                                            <li><a href="#">m</a></li>
+                                            <li><a href="#">l</a></li>
+                                            <li><a href="#">xl</a></li>
+                                        </ul>
+                                    </div>
+                                    <h6 class="product-title">مقدار</h6>
+                                    <div class="qty-box">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
+                                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                </button>
+                                            </span>
+                                            <input type="text" name="quantity" class="form-control input-number" value="1">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
+                                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-buttons">
+                                    <a href="#" class="btn btn-solid">سبد خرید</a>
+                                    <a href="#" class="btn btn-solid">نمایش جزئیات</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick-view modal popup end-->
+    @{
+        #endregion
+    }
+    <!-- js file -->
+    <script src="~/assets/js/jquery-3.3.1.min.js"></script>
+
+    <!-- zoom js file -->
+    <script src="~/assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- popper js file -->
+    <script src="~/assets/js/popper.min.js"></script>
+
+    <!-- bootstrap js file -->
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
+    <!-- Owl carousel js file-->
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+
+    <!-- menu js-->
+    <script src="~/assets/js/menu.js"></script>
+
+    <!-- Lazy Loader js file-->
+    <script src="~/assets/js/lazysizes.min.js"></script>
+
+    <!-- Counter Js File -->
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/jquery.waypoints.min.js"></script>
+
+    <!-- slick js-->
+    <script src="~/assets/js/slick.js"></script>
+
+    <!-- AOS js file-->
+    <script src="~/assets/js/aos.js"></script>
+
+    <!-- script js file -->
+    <script src="~/assets/js/script.js"></script>
+
+    <!-- ecommerce js file -->
+    <script src="~/assets/js/ecommerce.js"></script>
+
+    <script src="~/assets/js/filter.js?version=1"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
