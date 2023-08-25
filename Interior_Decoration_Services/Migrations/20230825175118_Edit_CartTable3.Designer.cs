@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteriorDecorationServices.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20230825164124_Edit_CartTable2")]
-    partial class EditCartTable2
+    [Migration("20230825175118_Edit_CartTable3")]
+    partial class EditCartTable3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,6 +61,9 @@ namespace InteriorDecorationServices.Migrations
 
                     b.Property<int>("buyerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("productId")
                         .HasColumnType("int");

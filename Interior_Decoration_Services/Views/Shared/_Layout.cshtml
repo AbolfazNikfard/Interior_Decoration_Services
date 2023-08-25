@@ -160,7 +160,18 @@
                                         <li>
                                             <a href="#">نمونه کار ها</a>
                                         </li>
-                                       @* <li>
+                                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Buyer"))
+                                        {
+                                            <li>
+                                                <a href="#">پنل کاربری</a>
+                                                <ul>
+                                                    <li class="nav-item"><a class="nav-link" href="blog-details.html">اطلاعات کاربری</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="/Buy/userCart">لیست سفارشات</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="blogs-leftside.html">علاقه مندیها</a></li>
+                                                </ul>
+                                            </li>
+                                        }
+                                        @* <li>
                                             <a href="#">تیم خدمات</a>
                                             <ul>
                                                 <li class="nav-item"><a class="nav-link" href="single-portfolio.html">نمونه کار تنها</a></li>

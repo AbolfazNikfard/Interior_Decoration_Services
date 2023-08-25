@@ -58,8 +58,8 @@ namespace Interior_Decoration_Services.Controllers
                         productImage = o.product.productImage,
                         productName = o.product.Name,
                         //Price = o.Price,
-                        Number = o.Number,
-                        orderDate = o.orderDateTime.ToShamsi()
+                        //Number = o.Number,
+                        //orderDate = o.orderDateTime.ToShamsi()
                     })
                     .ToList();
                 return View(buyerOrders);

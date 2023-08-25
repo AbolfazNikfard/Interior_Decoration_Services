@@ -65,7 +65,8 @@ namespace Interior_Decoration_Services.Controllers
                         {
                             //Number = quntity,
                             productId = product.id,
-                            buyerId = buyer.id
+                            buyerId = buyer.id,
+                            createdAt = DateTime.Now
                         });
                     }
                     else

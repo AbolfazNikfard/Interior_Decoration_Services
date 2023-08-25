@@ -1,4 +1,5 @@
 ﻿using Interior_Decoration_Services.Data;
+using Interior_Decoration_Services.Enum;
 using Interior_Decoration_Services.Models;
 using Interior_Decoration_Services.Models.View_Models;
 using Microsoft.AspNetCore.Authorization;
@@ -37,6 +38,31 @@ namespace Interior_Decoration_Services.Controllers
                         boughtNumber = b.orders.Sum(o => o.Number)
                     }).ToList();
                 return View(buyers);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Catched Error: {e.Message}");
+                return StatusCode(500);
+            }
+        }
+        public IActionResult OrderList()
+        {
+            try
+            {
+                var orders = _context.carts.Where(c => c.Status == ProductStatus.Pending)
+                    .Include(p=>p.product)
+                    .Include(b=>b.buyer).ThenInclude(u=>u.user)
+                    .Select(o=>new OrderViewModel
+                    {
+                        orderId = o.Id,
+                        productId = o.productId,
+                        productName = o.product.Name,
+                        productImage = o.product.productImage,
+                        userName = o.buyer.user.UserName,
+                        orderDate = o.createdAt
+                    })
+                    .ToList();
+                return View(orders);
             }
             catch (Exception e)
             {

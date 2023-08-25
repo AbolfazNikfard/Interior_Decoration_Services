@@ -9,18 +9,18 @@
                     <hr>
                 </li>
                 @* <li class="has-sub">
-                    <a class="sidenav-item-link" href="javascript:void(0)">
-                        <i class="mdi mdi-account-group-outline"></i> <span class="nav-text">فروشندگان</span> <b class="caret"></b>
-                    </a>
-                    <div class="collapse">
-                        <ul class="sub-menu" id="vendors" data-parent="#sidebar-menu">
-                            <li>
-                                <a asp-controller="Admin" asp-action="SellerList" class="sidenav-item-link">
-                                    <span class="nav-text">لیست فروشندگان</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <a class="sidenav-item-link" href="javascript:void(0)">
+                <i class="mdi mdi-account-group-outline"></i> <span class="nav-text">فروشندگان</span> <b class="caret"></b>
+                </a>
+                <div class="collapse">
+                <ul class="sub-menu" id="vendors" data-parent="#sidebar-menu">
+                <li>
+                <a asp-controller="Admin" asp-action="SellerList" class="sidenav-item-link">
+                <span class="nav-text">لیست فروشندگان</span>
+                </a>
+                </li>
+                </ul>
+                </div>
                 </li> *@
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="javascript:void(0)">
@@ -62,11 +62,6 @@
                     </a>
                     <div class="collapse">
                         <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
-                            @* <li>
-                                <a asp-controller="Admin" asp-action="PendingProducts" class="sidenav-item-link">
-                                    <span>محصولات در انتظار تایید</span>
-                                </a>
-                            </li> *@
                             <li>
                                 <a asp-controller="AddProduct" asp-action="addProduct" asp-route-message="Add" class="sidenav-item-link">
                                     <span class="nav-text">افزودن محصول</span>
@@ -76,7 +71,21 @@
                                 <a asp-controller="AddProduct" asp-action="ProductList" class="sidenav-item-link">
                                     <span class="nav-text">لیست محصولات</span>
                                 </a>
-                            </li>                                                        
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)">
+                        <i class="mdi mdi-cart"></i> <span class="nav-text">سفارشات</span> <b class="caret"></b>
+                    </a>
+                    <div class="collapse">
+                        <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
+                             <li>
+                            <a asp-controller="Admin" asp-action="OrderList" class="sidenav-item-link">
+                            <span>سفارشات در انتظار تایید</span>
+                            </a>
+                            </li> 
                         </ul>
                     </div>
                 </li>
@@ -93,7 +102,7 @@
                             </li>
                             <li>
                                 <a asp-controller="Reports" asp-action="SoldPerProduct" class="sidenav-item-link">
-                                    <span >فروش بر اساس محصول</span>
+                                    <span>فروش بر اساس محصول</span>
                                 </a>
                             </li>
                         </ul>

@@ -53,8 +53,8 @@
                                             <th scope="col">شناسه</th>
                                             <th scope="col">تصویر</th>
                                             <th scope="col">نام</th>
-                                            <th scope="col">تعداد</th>
-                                            <th scope="col">قیمت(تومان)</th>
+                                            @*<th scope="col">تعداد</th>*@
+                                            @*<th scope="col">قیمت(تومان)</th>*@
                                             <th scope="col">تاریخ</th>
                                             <th scope="col">فعالیت</th>
                                         </tr>
@@ -66,11 +66,11 @@
                                                 <th scope="row"><span>@order.productId</span></th>
                                                 <td><img class="prod-img" src="~/assets/images/product-image/@(order.productImage)" alt="عکس محصول"></td>
                                                 <td><span>@order.productName</span></td>
-                                                <td><span>@order.Number</span></td>
-                                                @{
+                                                @*<td><span>@order.Number</span></td>*@
+                                                @*@{
                                                     ShowReadablePrice = (ulong)order.Price;
                                                 }
-                                                <td><span>@ShowReadablePrice.ToMoreReadable()</span></td>
+                                                <td><span>@ShowReadablePrice.ToMoreReadable()</span></td>*@
                                                 <td><span>@order.orderDate</span></td>
                                                 <td><span class="tbl-btn"><a asp-controller="Product" asp-action="ProductDetails" asp-route-productId="@order.productId" class="btn btn-lg btn-primary">مشاهده</a></span></td>
                                             </tr>

@@ -59,6 +59,9 @@ namespace InteriorDecorationServices.Migrations
                     b.Property<int>("buyerId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
