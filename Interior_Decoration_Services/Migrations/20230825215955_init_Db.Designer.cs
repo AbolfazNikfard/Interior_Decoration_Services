@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteriorDecorationServices.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20230825175118_Edit_CartTable3")]
-    partial class EditCartTable3
+    [Migration("20230825215955_init_Db")]
+    partial class initDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
