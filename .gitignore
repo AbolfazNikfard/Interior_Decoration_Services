@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Interior_Decoration_Services/wwwroot/assets/images/product-image/*.jpg
+/Interior_Decoration_Services/wwwroot/assets/images/product-image/*.png
+/Interior_Decoration_Services/wwwroot/assets/images/product-image/*.gif
