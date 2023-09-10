@@ -28,6 +28,8 @@ namespace Interior_Decoration_Services.Controllers
             {
                 if (User.IsInRole("Buyer"))
                     return RedirectToAction("Index", "Home");
+                else if (User.IsInRole("Service"))
+                    return RedirectToAction("Index", "Service");
                 else
                     return RedirectToAction("Index", "Admin");
             }
@@ -43,6 +45,8 @@ namespace Interior_Decoration_Services.Controllers
                 {
                     if (User.IsInRole("Buyer"))
                         return RedirectToAction("Index", "Home");
+                    else if (User.IsInRole("Service"))
+                        return RedirectToAction("Index", "Service");
                     else
                         return RedirectToAction("Index", "Admin");
                 }
@@ -98,6 +102,8 @@ namespace Interior_Decoration_Services.Controllers
             {
                 if (User.IsInRole("Buyer"))
                     return RedirectToAction("Index", "Home");
+                else if (User.IsInRole("Service"))
+                    return RedirectToAction("Index", "Service");
                 else
                     return RedirectToAction("Index", "Admin");
             }
@@ -117,6 +123,8 @@ namespace Interior_Decoration_Services.Controllers
                 {
                     if (User.IsInRole("Buyer"))
                         return RedirectToAction("Index", "Home");
+                    else if (User.IsInRole("Service"))
+                        return RedirectToAction("Index", "Service");
                     else
                         return RedirectToAction("Index", "Admin");
                 }
@@ -142,7 +150,9 @@ namespace Interior_Decoration_Services.Controllers
                         var roleName = await _userManager.GetRolesAsync(user);
                         if (roleName[0] == "Buyer")
                             return RedirectToAction("Index", "Home");
-                        else
+                        else if (roleName[0] == "Service")
+                            return RedirectToAction("Index", "Service");
+                        else if (roleName[0] == "Admin")
                             return RedirectToAction("Index", "Admin");
                     }
 

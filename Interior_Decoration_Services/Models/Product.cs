@@ -9,7 +9,7 @@ namespace Interior_Decoration_Services.Models
             //groupToProducts = new List<GroupToProduct>();
             //subGroupToProducts = new List<subGroupToProduct>();
             orders = new List<Order>();
-            carts = new List<Cart>();
+            //carts = new List<Order>();
         }
         [Key]
         public int id { get; set; }
@@ -18,9 +18,11 @@ namespace Interior_Decoration_Services.Models
         public string? Summary { get; set; }
         //public int Weight { get; set; }
         //public UnitOFMassMeasurement WeightMassUnit { get; set; }
-        //public int Price { get; set; }
+        public int Price { get; set; }
+        public string? Size { get; set; }
         public string? Material { get; set; }
-        public string? Color { get; set; }     
+        public string? Color { get; set; }
+        public string? Unit { get; set; }
         public bool Stock { get; set; }
         //public UnitOFMassMeasurement StockMassUnit { get; set; }
         //public AcceptProduct confirmation { get; set; }
@@ -38,7 +40,7 @@ namespace Interior_Decoration_Services.Models
         //CartItem cartItem { get; set; }
         //ICollection<Category> categories { get; set; }
         //public ICollection<GroupToProduct> groupToProducts { get; set; }
-        public ICollection<Cart> carts { get; set; }
+        //public ICollection<Order> carts { get; set; }
         //public ICollection<subGroupToProduct> subGroupToProducts { get; set; }
         public ICollection<Order> orders { get; set; }
     }

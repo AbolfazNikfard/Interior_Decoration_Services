@@ -23,14 +23,14 @@
             }
             else {
                 const productIdElement = document.getElementById("productIdSection");
-                //const The_number_of_items_added_to_the_shopping_cart = document.getElementById("input-quantity");
-                //const itemNumber = The_number_of_items_added_to_the_shopping_cart.value;
+                const OrderDescription = document.getElementById("OrderDescription").value;
+                console.log("Order Description: ", OrderDescription);
                 const requestBody = {
-                    productId: productIdElement.innerText
-                    //number: itemNumber
+                    productId: productIdElement.innerText,
+                    Description: OrderDescription
                 }
-                console.log(requestBody);
-                const response = await fetch("/Buy/addToCart", {
+                console.log("Request Body: ", requestBody);
+                const response = await fetch("/Indent/AddOrder", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -96,7 +96,7 @@
                         messageBoxText.innerText = "محصول با موفقیت به سفارشات شما افزوده شد. در حال انتقال به صفحه لیست سفارشات ...";
                         showMessage();
                         setTimeout(() => {
-                            window.location.replace("/Buy/userCart");
+                            window.location.replace("/Indent/UserOrders");
                         }, 4000)
                     }
                 }

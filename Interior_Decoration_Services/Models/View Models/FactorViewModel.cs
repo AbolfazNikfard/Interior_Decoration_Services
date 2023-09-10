@@ -4,10 +4,10 @@
     {
         public FactorViewModel()
         {
-            cartItems = new List<CartViewModel>();
+            cartItems = new List<UserOrderViewModel>();
         }
         public string Telphone { get; set; }
         public string Address { get; set; }
-        public List<CartViewModel> cartItems { get; set; }
+        public List<UserOrderViewModel> cartItems { get; set; }
     }
 }

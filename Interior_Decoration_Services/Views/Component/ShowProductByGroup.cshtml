@@ -140,7 +140,14 @@
                                                                 <div>
                                                                     <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><h6>@product.Name</h6>
                                                                     <p>@product.Description</p>
-                                                                    @*<h4>برای استعلام قیمت سفارش خود را ثبت کنید</h4>*@
+                                                                    <h5>
+                                                                        قیمت : <span>
+                                                                            @{
+                                                                                ulong ShowReadablePrice = (ulong)product.Price;
+                                                                            }
+                                                                            @ShowReadablePrice.ToMoreReadable() تومان
+                                                                        </span>
+                                                                    </h5>
                                                                 </div>
                                                             </div>
                                                         </div>

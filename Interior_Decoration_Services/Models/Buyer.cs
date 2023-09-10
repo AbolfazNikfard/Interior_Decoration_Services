@@ -7,7 +7,7 @@ namespace Interior_Decoration_Services.Models
     {
         public Buyer()
         {
-            carts = new List<Cart>();
+            //carts = new List<Order>();
             orders = new List<Order>();
         }
         [Key]
@@ -18,7 +18,7 @@ namespace Interior_Decoration_Services.Models
         [ForeignKey("User")]
         public string userId { get; set; }
         public User user { get; set; }
-        public ICollection<Cart> carts { get; set; }
+        //public ICollection<Order> carts { get; set; }
         public ICollection<Order> orders { get; set; }
     }
 }

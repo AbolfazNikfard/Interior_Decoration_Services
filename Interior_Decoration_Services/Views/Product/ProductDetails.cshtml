@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     //ulong ShowReadablePrice;
 }
-<link rel="stylesheet" href="~/assets/css/message-box.css">
+@{
+    ulong ShowReadablePrice = (ulong)Model.Price;
+}
+<link rel="stylesheet" href="~/assets/css/message-box.css?version=1">
 <!-- section start -->
 <section class="section-b-space shop_page cmn_bg_yellow">
     <ul class="plus_decore">
@@ -35,75 +38,38 @@
                                     <div class="item">
                                         <img src="~/assets/images/product-image/@(Model.productImage)" alt="logo">
                                     </div>
-    @*<div class="item">
-                                    <img src="assets/images/pro/b2.jpg" alt="logo">
-                                    </div>
-                                    <div class="item">
-                                    <img src="assets/images/pro/b3.jpg" alt="logo">
-                                    </div>
-                                    <div class="item">
-                                    <img src="assets/images/pro/b4.jpg" alt="logo">
-                                    </div>*@
                                 </div>
-    @*<div id="thumbs" class="owl-carousel owl-theme">
-                                <div class="item">
-                                <img src="assets/images/pro/b1.jpg" alt="logo">
-                                </div>
-                                <div class="item">
-                                <img src="assets/images/pro/b2.jpg" alt="logo">
-                                </div>
-                                <div class="item">
-                                <img src="assets/images/pro/b3.jpg" alt="logo">
-                                </div>
-                                <div class="item">
-                                <img src="assets/images/pro/b4.jpg" alt="logo">
-                                </div>
-                                </div>*@
                             </div>
                         </div>
                         <div class="col-lg-6 rtl-text">
                             <div class="product-right">
                                 <span id="productIdSection" style="display:none">@Model.id</span>
                                 <h2>@Model.Name</h2>
-            @*  <h4><del>45900تومان</del><span>55٪ تخفیف</span></h4>
-                                <h3>32000تومان</h3>
-                                <div class="product-description border-product">
-                                <h6 class="product-title">مقدار</h6>
-                                <div class="qty-box">
-                                <div class="input-group">
-                                <span class="input-group-prepend">
-                                <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                </button>
-                                </span>
-                                <input type="text" name="quantity" class="form-control input-number" value="1">
-                                <span class="input-group-prepend">
-                                <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                </button>
-                                </span>
-                                </div>
-                                </div>
-                                </div>*@
-            @if (User.IsInRole("Buyer"))
-            {
+                                <h3>
+                                    <span>
+                                        @ShowReadablePrice.ToMoreReadable()
+                                    </span>
+                                    تومان
+                                </h3>
+                                @if (User.IsInRole("Buyer"))
+                                {
+                                    <h6>قبل از ثبت سفارش خود در صورت نیاز در بخش توضیحات سفارش توضیحات لازم(همچون متراژ زمین برای پارکت، تعداد دیوار ها و اندازه برای کاغذ دیواری و ...) را ارائه بفرمایید</h6>
                                     <div class="product-buttons">
                                         <button id="addToCart-submit-btn" class="theme_btn">
                                             ثبت سفارش
                                             <span class="theme_btn_eff"></span>
                                         </button>
-                    @*<a class="theme_btn" href="#">
-                                    خرید حالا
-                                    <span class="theme_btn_eff"></span>
-                                    </a>*@
                                     </div>
-            }
+                                }
+                                @if (Model.Summary != null)
+                                {
+                                    <div class="border-product">
+                                        <h6 class="product-title">خلاصه</h6>
+                                        <p>@Model.Summary</p>
+                                    </div>
+                                }
                                 <div class="border-product">
-                                    <h6 class="product-title">خلاصه</h6>
-                                    <p>@Model.Summary</p>
-                                </div>
-                                <div class="border-product">
-                                    <h6 class="product-title">اشتراک گذاری</h6>
+                                    <h6 class="product-title">اشتراک گذاری در</h6>
                                     <div class="product-icon">
                                         <ul class="product-social">
                                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -112,7 +78,7 @@
                                             <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                                             <li><a href="#"><i class="fa fa-rss"></i></a></li>
                                         </ul>
-                    @*<form class="d-inline-block">
+                                        @*<form class="d-inline-block">
                                         <button class="wishlist-btn"><i class="fa fa-heart"></i><span class="title-font">افزودن به علاقه</span></button>
                                         </form>*@
                                     </div>
@@ -132,10 +98,10 @@
                                         <a class="nav-link" id="profile-top-tab" data-toggle="tab" href="#top-profile" role="tab" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>مشخصات</a>
                                         <div class="material-border"></div>
                                     </li>
-                    @* <li class="nav-item">
-                                    <a class="nav-link" id="contact-top-tab" data-toggle="tab" href="#top-contact" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>ویدئو</a>
-                                    <div class="material-border"></div>
-                                    </li>*@
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-top-tab" data-toggle="tab" href="#top-contact" role="tab" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>توضیحات سفارش</a>
+                                        <div class="material-border"></div>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="review-top-tab" data-toggle="tab" href="#top-review" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>ارسال نظر</a>
                                         <div class="material-border"></div>
@@ -146,75 +112,61 @@
                                         <p>@Model.Description</p>
                                     </div>
                                     <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                        @*<p>لورم ایپسوم به راحتی متن ساختاری چاپ و نشر صنعت است. لورم ایپسوم از سال های 1500 تاکنون استاندارد متفاوتی از استاندارد صنعت بوده است، زمانی که یک چاپگر ناشناخته با یک نوع کابین از آن استفاده کرد و آن را برای ساخت یک نمونه نمونه. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>*@
                                         <div class="single-product-tables">
                                             <table>
                                                 <tbody>
-                                    @*  <tr>
-                                                    <td>پارچه</td>
-                                                    <td>نوعی پارچه ابریشمی</td>
-                                                    </tr>*@
-                                    @if (Model.Color != null)
-                                    {
+                                                    @if (Model.Color != null)
+                                                    {
                                                         <tr>
                                                             <td>رنگ</td>
                                                             <td>@Model.Color</td>
                                                         </tr>
-                                    }
-                                    @if (Model.Material != null)
-                                    {
+                                                    }
+                                                    @if (Model.Material != null)
+                                                    {
                                                         <tr>
                                                             <td>جنس</td>
                                                             <td>@Model.Material</td>
                                                         </tr>
-                                    }
+                                                    }
+                                                    @if (Model.Size != null)
+                                                    {
+                                                        <tr>
+                                                            <td>ابعاد</td>
+                                                            <td>@Model.Size متر</td>
+                                                        </tr>
+                                                    }
+                                                    @if (Model.Unit != null)
+                                                    {
+                                                        <tr>
+                                                            <td>واحد</td>
+                                                            <td>@Model.Unit</td>
+                                                        </tr>
+                                                    }
                                                 </tbody>
                                             </table>
-                            @* <table>
-                                            <tbody>
-                                            <tr>
-                                            <td>طول</td>
-                                            <td>50 اینچ</td>
-                                            </tr>
-                                            <tr>
-                                            <td>اندازه</td>
-                                            <td>S, M, L .XXL</td>
-                                            </tr>
-                                            </tbody>
-                                            </table>*@
                                         </div>
                                     </div>
-                    @*<div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                                    <div class="mt-3 text-center">
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
+                                        <div class="col-md-12">
+                                            <h5>توضیحات سفارش : </h5>
+                                            <textarea class="form-control" placeholder="توضیحات سفارش خود را اینجا بنویسید" id="OrderDescription" rows="4" maxlength="300"></textarea>
+                                        </div>
                                     </div>
-                                    </div>*@
                                     <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
                                         <form class="theme-form" asp-controller="Comment" asp-action="addComment" asp-route-productId="@Model.id" asp-route-userName="@User.Identity.Name" method="post">
                                             <div class="ec-ratting-input form-submit">
                                                 <div class="form-row">
                                                     <div class="col-md-12">
-                                                        <div class="media">
-                                                            <label>امتیاز</label>
-                                                            <div class="media-body ml-3">
-                                                                <div class="rating three-star comment_rate"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                                            </div>
+                                                        @*<div class="media">
+                                                        <label>امتیاز</label>
+                                                        <div class="media-body ml-3">
+                                                        <div class="rating three-star comment_rate"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                                                         </div>
-                                                    </div>
-                                    @* <div class="col-md-6">
-                                                    <label for="name">نام</label>
-                                                    <input type="text" class="form-control" id="name" placeholder="نام خود را وارد کنید" required>
-                                                    </div>*@
-                                    @* <div class="col-md-6">
-                                                    <label for="email">ایمیل</label>
-                                                    <input asp-for=userName type="text" class="form-control" id="email" placeholder="ایمیل" required>
+                                                        </div>*@
                                                     </div>
                                                     <div class="col-md-12">
-                                                    <label for="review">عنوان بازبینی</label>
-                                                    <input type="text" class="form-control" id="review" placeholder="موارد نقد و بررسی خود را وارد کنید" required>
-                                                    </div>*@
-                                                    <div class="col-md-12">
-                                                        <label for="review">عنوان بازبینی</label>
+                                                        <h5>متن نظر: </h5>
                                                         <textarea name="comment" class="form-control" placeholder="نظر خود را اینجا بنویسید" id="comment" rows="6"></textarea>
                                                     </div>
                                                     <div class="col-md-12">
@@ -306,4 +258,4 @@
         </div>
     </div>
 </section>
-<script src="~/assets/js/addToCart.js?version=2"></script>
+<script src="~/assets/js/AddOrder.js?version=3"></script>

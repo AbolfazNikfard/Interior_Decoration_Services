@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="کاپشاپ - داشبورد مدیریتی فروشگاهی اچ تی ام ال">
-    @if (User.IsInRole("Seller"))
+    @if (User.IsInRole("Service"))
     {
-        <title>کاپشاپ - پنل فروشنده</title>
+        <title>کاپشاپ - پنل سرویس کار</title>
     }
     else
     {
-    <title>کاپشاپ - پنل ادمین</title>
-    }    
+        <title>کاپشاپ - پنل ادمین</title>
+    }
 
     <!--Data Table-->
     <link href="~/AdminPanel/assets/plugins/data-tables/datatables.bootstrap5.min.css" rel="stylesheet">
@@ -29,9 +29,9 @@
 <body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-light ec-header-light" id="body">
     <div class="wrapper">
         <div class="ec-page-wrapper">
-            @if (User.IsInRole("Seller"))
+            @if (User.IsInRole("Service"))
             {
-                <partial name="_SellerSidebarPanel"></partial>
+                <partial name="_ServiceSidebarPanel"></partial>
             }
             else if (User.IsInRole("Admin"))
             {
@@ -66,9 +66,9 @@
                                         <img src="~/assets/images/user/user-image.jpg" class="img-circle"
                                              alt="User Image">
                                         <div class="d-inline-block">
-                                            @if (User.IsInRole("Seller"))
+                                            @if (User.IsInRole("Service"))
                                             {
-                                                <span>فروشنده</span>
+                                                <span>سرویس کار</span>
                                             }
                                             else
                                             {
@@ -107,7 +107,7 @@
                 <div class="copyright bg-white">
                     <p>
                         &copy;  کپی رایت  <a class="text-primary"
-                                             href=" " target="_blank"> داشبورد مدیریتی کاپشاپ </a>.
+                                             href=" " target="_blank"> داشبورد مدیریتی </a>.
                         همه حقوق محفوظ است.
                     </p>
                 </div>

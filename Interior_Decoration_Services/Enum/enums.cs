@@ -1,9 +1,12 @@
 ﻿namespace Interior_Decoration_Services.Enum
 {
-    public enum ProductStatus
+    public enum OrderStatus
     {
         Pending,
-        Accept,
-        Reject,
+        reffered,
+        doing,
+        canceled,
+        finished,
+        rejected
     }
 }

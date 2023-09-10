@@ -31,7 +31,7 @@ namespace Interior_Decoration_Services.Controllers
             }
             else
             {
-                products = products = _context.products;
+                products = _context.products;
                 productCount = (double)_context.products.Count();
             }
 

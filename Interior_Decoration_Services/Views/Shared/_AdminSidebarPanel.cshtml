@@ -82,10 +82,35 @@
                     <div class="collapse">
                         <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
                              <li>
-                            <a asp-controller="Admin" asp-action="OrderList" class="sidenav-item-link">
-                            <span>سفارشات در انتظار تایید</span>
+                                <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="pending" class="sidenav-item-link">
+                            <span>سفارشات در انتظار </span>
                             </a>
-                            </li> 
+                            </li>
+                            <li>
+                                <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="reffered" class="sidenav-item-link">
+                                    <span>سفارشات ارجاع داده شده</span>
+                                </a>
+                            </li>
+                              <li>
+                                <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="doing" class="sidenav-item-link">
+                            <span>سفارشات در حال انجام</span>
+                            </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="finished" class="sidenav-item-link">
+                                    <span>سفارشات به اتمام رسیده</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="canceled" class="sidenav-item-link">
+                                    <span>سفارشات لغو شده</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="rejected" class="sidenav-item-link">
+                                    <span>سفارشات رد شده</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

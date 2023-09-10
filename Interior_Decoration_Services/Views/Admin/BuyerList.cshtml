@@ -25,7 +25,8 @@
                                     <tr>
                                         <th>نام</th>
                                         <th>ایمیل:</th>                                        
-                                        <th> مجموع خرید </th>
+                                        <th> سفارشات موفق </th>
+                                        <th> سفارشات لغو شده </th>
                                         <th>فعالیت</th>
                                     </tr>
                                 </thead>
@@ -37,7 +38,8 @@
                                             <td>
                                                 <span>@Model[i].Email</span>
                                             </td>                                            
-                                            <td>@Model[i].boughtNumber</td>
+                                            <td>@Model[i].SuccessfullOrders</td>
+                                            <td>@Model[i].CanceledOrder</td>
                                             <td>
                                                 <div>
                                                     <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" 

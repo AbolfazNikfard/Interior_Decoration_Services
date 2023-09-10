@@ -35,7 +35,9 @@ namespace Interior_Decoration_Services.Controllers
                         Name = b.user.Name,
                         Family = b.user.Family,
                         Email = b.user.Email,
-                        boughtNumber = b.orders.Sum(o => o.Number)
+                        SuccessfullOrders = b.orders.Where(o => o.Status == OrderStatus.finished).Count(),
+                        CanceledOrder = b.orders.Where(o => o.Status == OrderStatus.canceled).Count()
+
                     }).ToList();
                 return View(buyers);
             }
@@ -45,24 +47,62 @@ namespace Interior_Decoration_Services.Controllers
                 return StatusCode(500);
             }
         }
-        public IActionResult OrderList()
+        public IActionResult OrderList(string WhichOrders = "pending")
         {
             try
             {
-                var orders = _context.carts.Where(c => c.Status == ProductStatus.Pending)
-                    .Include(p=>p.product)
-                    .Include(b=>b.buyer).ThenInclude(u=>u.user)
-                    .Select(o=>new OrderViewModel
-                    {
-                        orderId = o.Id,
-                        productId = o.productId,
-                        productName = o.product.Name,
-                        productImage = o.product.productImage,
-                        userName = o.buyer.user.UserName,
-                        orderDate = o.createdAt
-                    })
-                    .ToList();
+                ViewData["OrdersType"] = WhichOrders;
+                IQueryable<Order> whichOrders;
+                List<OrderViewModel> orders;
+                if (WhichOrders == "pending")
+                    whichOrders = _context.orders.IgnoreQueryFilters().Where(c => c.Status == OrderStatus.Pending);
+
+                else if (WhichOrders == "doing")
+                    whichOrders = _context.orders.IgnoreQueryFilters().Where(c => c.Status == OrderStatus.doing);
+
+                else if (WhichOrders == "reffered")
+                    whichOrders = _context.orders.IgnoreQueryFilters().Where(c => c.Status == OrderStatus.reffered);
+
+                else if (WhichOrders == "canceled")
+                    whichOrders = _context.orders.IgnoreQueryFilters().Where(c => c.Status == OrderStatus.canceled);
+
+                else if (WhichOrders == "finished")
+                    whichOrders = _context.orders.IgnoreQueryFilters().Where(c => c.Status == OrderStatus.finished);
+
+                else
+                    whichOrders = _context.orders.IgnoreQueryFilters().Where(c => c.Status == OrderStatus.rejected);
+                orders = whichOrders.Include(p => p.product)
+                .Include(b => b.buyer).ThenInclude(u => u.user)
+                .Select(o => new OrderViewModel
+                {
+                    orderId = o.Id,
+                    productId = o.productId,
+                    productName = o.product.Name,
+                    productImage = o.product.productImage,
+                    productPrice = o.product.Price,
+                    userName = o.buyer.user.UserName,
+                    orderDate = o.createdAt
+                })
+                .ToList();
                 return View(orders);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Catched Error: {e.Message}");
+                return StatusCode(500);
+            }
+        }
+        public IActionResult DeterminingOrderStatus(int orderId, int status = 0, string wichOrdersList = "pending")
+        {
+            try
+            {
+                Order order = _context.orders.SingleOrDefault(o => o.Id == orderId);
+                if (order == null)
+                    return NotFound();
+                order.Status = (OrderStatus)status;
+                _context.orders.Update(order);
+                _context.SaveChanges();
+                return RedirectToAction("OrderList", "Admin", new { WhichOrders = wichOrdersList });
             }
             catch (Exception e)
             {

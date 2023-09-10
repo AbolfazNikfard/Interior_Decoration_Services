@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteriorDecorationServices.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20230825215955_init_Db")]
-    partial class initDb
+    [Migration("20230910091115_Initial_Database")]
+    partial class InitialDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,10 +194,19 @@ namespace InteriorDecorationServices.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Stock")
                         .HasColumnType("bit");
 
                     b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unit")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("groupId")

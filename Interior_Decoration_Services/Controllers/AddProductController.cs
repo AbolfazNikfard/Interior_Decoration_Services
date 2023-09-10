@@ -48,7 +48,6 @@ namespace Interior_Decoration_Services.Controllers
                 {
                     groupAndSubGroups = groupsAndSubGroups,
                     product = product
-
                 };
                 return View(addProduct);
             }

@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public string Family { get; set; }
         public string Email { get; set; }
-        public int boughtNumber { get; set; }
+        public int SuccessfullOrders { get; set; }
+        public int CanceledOrder { get; set; }
+
     }
 }

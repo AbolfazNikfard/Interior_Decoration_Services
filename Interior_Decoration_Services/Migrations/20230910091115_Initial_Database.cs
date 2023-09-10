@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InteriorDecorationServices.Migrations
 {
     /// <inheritdoc />
-    public partial class initDb : Migration
+    public partial class InitialDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -225,8 +225,11 @@ namespace InteriorDecorationServices.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Stock = table.Column<bool>(type: "bit", nullable: false),
                     registerDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),

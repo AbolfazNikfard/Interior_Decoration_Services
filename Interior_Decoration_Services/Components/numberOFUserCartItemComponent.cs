@@ -1,4 +1,5 @@
 ﻿using Interior_Decoration_Services.Data;
+using Interior_Decoration_Services.Enum;
 using Interior_Decoration_Services.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ namespace Interior_Decoration_Services.Components
                 ViewData["ForWhere"] = ForWhere;
                 return View(viewAdress);
             }
-            int userCart = _context.carts.Where(c => c.buyerId == buyer.id).Count();
+            int userCart = _context.orders.Where(o => o.buyerId == buyer.id && (o.Status == OrderStatus.Pending || o.Status == OrderStatus.reffered || o.Status == OrderStatus.doing)).Count();
             ViewData["NumberOfCartItem"] = userCart;
             ViewData["ForWhere"] = ForWhere;
             return View(viewAdress);

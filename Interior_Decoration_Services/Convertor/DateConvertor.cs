@@ -2,7 +2,7 @@
 
 namespace Interior_Decoration_Services.Convertor
 {
-    public static class DateConvertor
+    public static class DateTimeConvertor
     {
         public static string ToShamsi(this DateTime value)
         {
