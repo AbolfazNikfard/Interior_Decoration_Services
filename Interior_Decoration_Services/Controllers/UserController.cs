@@ -4,9 +4,6 @@ using Interior_Decoration_Services.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.DotNet.Scaffolding.Shared.Project;
-
 namespace Interior_Decoration_Services.Controllers
 {
     [Authorize(Roles = "Buyer")] //[Authorize(Roles = "Seller,Buyer")]
@@ -33,7 +30,7 @@ namespace Interior_Decoration_Services.Controllers
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
             if (user == null) { return NotFound(); }
 
-            UserViewModel userModel = new UserViewModel
+            UserProfileViewModel userModel = new UserProfileViewModel
             {
                 user = user
             };
@@ -43,7 +40,7 @@ namespace Interior_Decoration_Services.Controllers
                 return View("~/Views/Seller/Profile.cshtml", userModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateProfile(UserViewModel updateUser, string? message)
+        public async Task<IActionResult> UpdateProfile(UserProfileViewModel updateUser, string? message)
         {
             try
             {

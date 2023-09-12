@@ -1,0 +1,128 @@
+﻿@model OrderDetailViewModel
+@{
+    ViewData["Title"] = "OrderDetail";
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+}
+@{
+    ulong ShowReadablePrice;
+}
+<div class="ec-content-wrapper">
+    <div class="content">
+        <div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+            <h1>جزییات سفارش </h1>
+            <p class="breadcrumbs">
+                <span><a href="index.html">پنل</a></span> <span>
+                    <i class="mdi mdi-chevron-left"></i>
+                </span>جزییات سفارش
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="ec-odr-dtl card card-default">
+                    <div class="card-header card-header-border-bottom d-flex justify-content-between">
+                        <h2 class="ec-odr">جزییات سفارش <br><span class="small"> شناسه سفارش: #@Model.orderId</span></h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-6">
+                                <address class="info-grid">
+                                    <div class="info-title"><strong> نام و نام خانوادگی مشتری: </strong></div><br>
+                                    <div class="info-content" style="text-align:center">
+                                        @Model.userFirstName @Model.userLastName
+                                    </div>
+                                </address>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <address class="info-grid">
+                                    <div class="info-title"><strong> آدرس مشتری: </strong></div><br>
+                                    <div class="info-content">
+                                        @Model.userAddress
+                                    </div>
+                                </address>
+                            </div>
+                            <div class="col-xl-3 col-lg-6">
+                                <address class="info-grid">
+                                    <div class="info-title"><strong>تلفن مشتری:</strong></div><br>
+                                    <div class="info-content" style="text-align:center">
+                                        @Model.userPhone
+                                    </div>
+                                </address>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-6">
+                                <address class="info-grid">
+                                    <div class="info-title"><strong>توضیحات سفارش:</strong></div><br>
+                                    <div class="info-content">@Model.orderDescription</div>
+                                </address>
+                            </div>
+                            <div class="col-xl-3 col-lg-6">
+                                <address class="info-grid">
+                                    <div class="info-title"><strong> تاریخ سفارش: </strong></div><br>
+                                    <div class="info-content" style="text-align:center">ساعت : @Model.orderRegisterDateTime.ToString("HH:mm:ss")<br>تاریخ : @Model.orderRegisterDateTime.ToShamsi()</div>
+                                </address>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="tbl-title">محصول</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-striped o-tbl">
+                                        <thead>
+                                            <tr class="line">
+                                                <td class="text-center"><strong>شناسه</strong></td>
+                                                <td class="text-center"><strong>تصویر</strong></td>
+                                                <td class="text-center"><strong>نام</strong></td>
+                                                <td class="text-center"><strong>واحد</strong></td>
+                                                <td class="text-center"><strong>اندازه</strong></td>
+                                                <td class="text-center"><strong>قیمت</strong></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">@Model.productId</td>
+                                                <td class="text-center">
+                                                    <img class="product-img"
+                                                         src="~/assets/images/product-image/@Model.productImage" alt="">
+                                                </td>
+                                                <td class="text-center">@Model.productName</td>
+                                                <td class="text-center">@Model.productUnit</td>
+                                                @if (Model.productUnit != null && Model.productSize != null)
+                                                {
+                                                    <td class="text-center">هر @Model.productUnit @Model.productSize متر</td>
+                                                }
+                                                else if (Model.productUnit == null && Model.productSize != null)
+                                                {
+                                                    <td class="text-center">@Model.productSize متر</td>
+                                                }
+                                                @if (Model.productUnit != null)
+                                                {
+                                                    <td class="text-center">
+                                                        هر @Model.productUnit @{
+                                                            ShowReadablePrice = (ulong)Model.productPrice;
+                                                        }
+                                                        @ShowReadablePrice.ToMoreReadable() تومان
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="text-center">
+                                                        @{
+                                                            ShowReadablePrice = (ulong)Model.productPrice;
+                                                        }
+                                                        @ShowReadablePrice.ToMoreReadable() تومان
+                                                    </td>
+                                                }
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

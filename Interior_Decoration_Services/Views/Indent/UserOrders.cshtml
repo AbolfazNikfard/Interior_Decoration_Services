@@ -107,13 +107,14 @@
                                     <td>@item.registerDateTime.ToShamsi()</td>
                                     <td>@item.registerDateTime.ToString("HH:mm:ss")</td>
                                     <td>
+                                        <div style="width:150px">
                                         @if (item.OrderStat == OrderStatus.Pending)
                                         {
                                             <span style="color:gray">در حال بررسی</span>
                                         }
                                         else if (item.OrderStat == OrderStatus.reffered)
                                         {
-                                            <span style="color:green">درخواست شما به سرویس کار ارجاع داده شد.منتظر ارسال سرویس کار بمانید</span>
+                                            <span style="color:green">درخواست شما به سرویس کار ارجاع داده شد. منتظر ارسال سرویس کار بمانید</span>
                                         }
                                         else if (item.OrderStat == OrderStatus.canceled)
                                         {
@@ -131,6 +132,7 @@
                                         {
                                             <span style="color:orange">رد شده</span>
                                         }
+                                        </div>
                                     </td>
                                     <td>
                                         @if (item.OrderStat == OrderStatus.Pending)

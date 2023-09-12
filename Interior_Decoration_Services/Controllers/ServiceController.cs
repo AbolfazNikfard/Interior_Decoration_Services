@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Interior_Decoration_Services.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Interior_Decoration_Services.Controllers
 {
@@ -13,9 +14,12 @@ namespace Interior_Decoration_Services.Controllers
     public class ServiceController : Controller
     {
         private ProjectContext _context;
-        public ServiceController(ProjectContext context)
+        private readonly UserManager<User> _userManager;
+        public ServiceController(ProjectContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
+
         }
         public IActionResult Index()
         {
@@ -57,6 +61,42 @@ namespace Interior_Decoration_Services.Controllers
                 Console.WriteLine($"Catched Error: {e.Message}");
                 return StatusCode(500);
             }
+        }
+        public async Task<IActionResult> OrderDetail(int orderId)
+        {
+            var order = _context.orders.SingleOrDefault(o => o.Id == orderId);
+            if (order == null)
+                return NotFound();
+
+            var product = _context.products.IgnoreQueryFilters().SingleOrDefault(p => p.id == order.productId);
+            if (product == null)
+                return NotFound();
+
+            var buyer = _context.buyers.IgnoreQueryFilters().SingleOrDefault(b => b.id == order.buyerId);
+            if (buyer == null)
+                return NotFound();
+
+            var user = await _userManager.FindByIdAsync(buyer.userId);
+            if (user == null)
+                return NotFound();
+
+            OrderDetailViewModel orderDetail = new OrderDetailViewModel
+            {
+                orderId = orderId,
+                orderDescription = order.Description,
+                orderRegisterDateTime = order.createdAt,
+                userFirstName = user.Name,
+                userLastName = user.Family,
+                userAddress = user.Address,
+                userPhone = user.PhoneNumber,
+                productId = order.productId,
+                productImage = product.productImage,
+                productName = product.Name,
+                productPrice = product.Price,
+                productUnit = product.Unit,
+                productSize = product.Size
+            };
+            return View(orderDetail);
         }
         public IActionResult DeterminingOrderStatus(int orderId, int status = 0, string wichOrdersList = "reffered")
         {

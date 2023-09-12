@@ -36,6 +36,11 @@ namespace Interior_Decoration_Services.Controllers
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 if (user == null) { return NotFound(); }
 
+                if (user.Address == null || user.PhoneNumber == null || user.Name == null || user.Family == null)
+                {
+                    string url = Url.Action("ProductDetails", "Product", new { productId = model.productId });
+                    return Ok(new { message = "Should complete user information first", url = $"/Buyer/Profile?message=Order&Url={url}" });
+                }
                 var buyer = _context.buyers.SingleOrDefault(b => b.userId == user.Id);
                 if (buyer == null) { return NotFound(); }
 

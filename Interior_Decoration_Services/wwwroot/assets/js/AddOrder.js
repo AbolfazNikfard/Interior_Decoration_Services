@@ -48,6 +48,9 @@
                     messageBoxText.innerText = "تعداد کالای وارد شده صحیح نیست";
                     showMessage();
                 }
+                else if (response.status === 404)
+                    window.location.href = response.url;
+
                 else if (response.status === 500) {
                     messageBox.style.backgroundColor = "#ef2f2f";
                     messageBox.style.backgroundColor = "#ef2f2f";
@@ -77,6 +80,9 @@
                         closeButton.classList.add("error");
                         messageBoxText.innerText = "محصول از قبل به عنوان سفارش ثبت شده است";
                         showMessage();
+                    }
+                    else if (data.message === "Should complete user information first") {
+                        window.location.href = data.url;
                     }
                     else if (data.message === "The product is not available") {
                         messageBox.style.backgroundColor = "#ef2f2f";

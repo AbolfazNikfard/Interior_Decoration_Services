@@ -76,6 +76,7 @@ namespace Interior_Decoration_Services.Controllers
                 .Select(o => new OrderViewModel
                 {
                     orderId = o.Id,
+                    orderDescription = o.Description,
                     productId = o.productId,
                     productName = o.product.Name,
                     productImage = o.product.productImage,
@@ -118,7 +119,7 @@ namespace Interior_Decoration_Services.Controllers
             {
                 var user = await _userManager.FindByEmailAsync(userEmail);
                 if (user == null) { return NotFound(); }
-                UserViewModel userModel = new UserViewModel
+                UserProfileViewModel userModel = new UserProfileViewModel
                 {
                     user = user
                 };
@@ -131,7 +132,7 @@ namespace Interior_Decoration_Services.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> EditUser([FromForm] UserViewModel updateUser)
+        public async Task<IActionResult> EditUser([FromForm] UserProfileViewModel updateUser)
         {
             try
             {

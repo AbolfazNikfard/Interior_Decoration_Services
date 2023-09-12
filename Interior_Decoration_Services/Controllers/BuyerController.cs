@@ -1,7 +1,7 @@
-﻿using Interior_Decoration_Services.Convertor;
-using Interior_Decoration_Services.Data;
+﻿using Interior_Decoration_Services.Data;
 using Interior_Decoration_Services.Models;
 using Interior_Decoration_Services.Models.View_Models;
+using Interior_Decoration_Services.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +14,7 @@ namespace Interior_Decoration_Services.Controllers
     {
         private ProjectContext _context;
         private UserManager<User> _userManager;
+        private const string BaseUrl = "assets/images/user-image";
         public BuyerController(ProjectContext context, UserManager<User> userManager)
         {
             _context = context;
@@ -23,24 +24,183 @@ namespace Interior_Decoration_Services.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Profile()
+        #region ProfileAndUpdateIt
+        [HttpGet]
+        public async Task<IActionResult> Profile(string? message, string? Url)
+        {
+            if (message == "Order")
+            {
+                ViewData["OrderMessage"] = message;
+                ViewData["Url"] = Url;
+            }
+            else
+            {
+                ViewData["OrderMessage"] = "";
+                ViewData["Url"] = "";
+            }
+
+
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+            if (user == null) { return NotFound(); }
+
+            UserProfileViewModel userModel = new UserProfileViewModel
+            {
+                user = user
+            };
+            return View(userModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Profile([FromForm] UserProfileViewModel updateUser, string? message, string? Url)
         {
             try
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                if (message == "Order")
+                {
+                    ViewData["OrderMessage"] = message;
+                    ViewData["Url"] = Url;
+                }
+                else
+                {
+                    ViewData["OrderMessage"] = "";
+                    ViewData["Url"] = "";
+                }
+
+                #region Validation
+                bool isNumber;
+                isNumber = long.TryParse(updateUser.user.PhoneNumber, out long phone);
+                long number = phone;
+                int count = 0;
+                while (number > 0)
+                {
+                    number = number / 10;
+                    count++;
+                }
+                if (updateUser.user.Name == null)
+                {
+                    ModelState.AddModelError("", "لطفا نام را وارد کنید");
+                    return View(updateUser);
+                }
+                if (updateUser.user.Family == null)
+                {
+                    ModelState.AddModelError("", "لطفا نام خانوادگی را وارد کنید");
+                    return View(updateUser);
+                }
+                if (updateUser.user.Address == null)
+                {
+                    ModelState.AddModelError("", "لطفا آدرس را وارد کنید");
+                    return View(updateUser);
+                }
+                if (updateUser.user.PhoneNumber == null)
+                {
+                    ModelState.AddModelError("", "لطفا شماره تماس را وارد کنید");
+                    return View(updateUser);
+                }
+                if (isNumber == false || count != 10)
+                {
+                    ModelState.AddModelError("", "شماره تماس معتبر نیست");
+                    return View(updateUser);
+                }
+                //if (phone == 0)
+                //{
+                //    ModelState.AddModelError("", "شماره تماس را بدون صفر اول وارد کنید");
+                //    return View(updateUser);
+                //}
+                #endregion
+                var user = await _userManager.FindByEmailAsync(User.Identity.Name);
                 if (user == null) { return NotFound(); }
 
-                var buyer = _context.buyers.SingleOrDefault(b => b.userId == user.Id);
-                if (buyer == null) { return NotFound(); }
+                user.Name = updateUser.user.Name;
+                user.Family = updateUser.user.Family;
+                user.Address = updateUser.user.Address;
+                user.PhoneNumber = updateUser.user.PhoneNumber;
 
-                return View(buyer);
+                if (updateUser.userImage != null)
+                {
+                    string userImageUrl = saveImages.createImage(updateUser.userImage.FileName.ToString(), updateUser.userImage, BaseUrl);
+                    user.userImage = userImageUrl;
+                }
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    if (message == "Order")
+                        return Redirect(Url);
+                    else
+                        return RedirectToAction("Profile", "Buyer");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "مشکلی در سمت سرور پیش آمده است لطفا بعدا مجددا تلاش کنید");
+                    return View(updateUser);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ModelState.AddModelError("", "مشکلی در سمت سرور پیش آمده است لطفا بعدا مجددا تلاش کنید");
+                return View(updateUser);
+            }
+        }
+        [HttpGet]
+        public IActionResult ChangePassword(string? message)
+        {
+            if (message != null)
+                ViewData["SuccessMessage"] = message;
+
+            else
+                ViewData["SuccessMessage"] = "";
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model, string? message)
+        {
+            try
+            {
+                if (message != null)
+                    ViewData["SuccessMessage"] = message;
+
+                else
+                    ViewData["SuccessMessage"] = "";
+
+
+                if (ModelState.IsValid)
+                {
+                    var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+                    bool checkOldPass = await _userManager.CheckPasswordAsync(user, model.oldPassword);
+                    if (checkOldPass == false)
+                    {
+                        ModelState.AddModelError("", "رمز عبور قدیمی اشتباه است");
+                        return View(model);
+
+                    }
+                    var result = await _userManager.ChangePasswordAsync(user, model.oldPassword, model.newPassword);
+                    if (result.Succeeded)
+                        return RedirectToAction("ChangePassword", "Buyer", new { message = "Success" });
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                        //ModelState.AddModelError("", "مشکلی در سمت سرور پیش آمده است لطفا بعدا مجددا تلاش کنید");
+                        return View(model);
+                    }
+                }
+                else
+                    return View(model);
+
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Catched Error: {e.Message}");
-                return StatusCode(500);
+                ModelState.AddModelError("", "مشکلی در سمت سرور پیش آمده است لطفا بعدا مجددا تلاش کنید");
+                return View(model);
+                //return StatusCode(500);
             }
         }
+        #endregion
         public async Task<IActionResult> Order()
         {
             try
