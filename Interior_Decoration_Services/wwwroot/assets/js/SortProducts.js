@@ -15,12 +15,12 @@
             case "Oldest":
                 optionElement = getOptionByValue("Oldest", selectSortOptionElement);
                 break;
-            //case "ExpensiveToCheap":
-            //    optionElement = getOptionByValue("ExpensiveToCheap", selectSortOptionElement);
-            //    break;
-            //case "CheapToExpensive":
-            //    optionElement = getOptionByValue("CheapToExpensive", selectSortOptionElement);
-            //    break;
+            case "ExpensiveToCheap":
+                optionElement = getOptionByValue("ExpensiveToCheap", selectSortOptionElement);
+                break;
+            case "CheapToExpensive":
+                optionElement = getOptionByValue("CheapToExpensive", selectSortOptionElement);
+                break;
             case "AlphabetAscending":
                 optionElement = getOptionByValue("AlphabetAscending", selectSortOptionElement);
                 break;

@@ -4,6 +4,7 @@ using Interior_Decoration_Services.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteriorDecorationServices.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20230913170010_Update_WorkSamples_Table")]
+    partial class UpdateWorkSamplesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,10 +319,10 @@ namespace InteriorDecorationServices.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("createdAt")
+                    b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("editedAt")
+                    b.Property<DateTime>("editedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("groupId")

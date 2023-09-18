@@ -21,13 +21,15 @@
                                 <br /><span asp-validation-for="Email" class="text-danger"></span><br /><br />
                             </div>
                             <div class="col-md-9">
-                                <label for="review">رمزعبور</label>
-                                <input asp-for="Password" type="password" class="form-control" id="review" placeholder="رمز عبور را وارد کنید" required="">
+                                <label for="Password">رمزعبور</label>
+                                <input asp-for="Password" type="password" class="form-control" id="Password" placeholder="رمز عبور را وارد کنید" required=""><br />
+                                <input id="PasswordCheck" type="checkbox" /> نمایش رمز<br />
                                 <br /><span asp-validation-for="Password" class="text-danger"></span><br /><br />
                             </div>
                             <div class="col-md-9">
-                                <label for="review">تکرار رمزعبور</label>
-                                <input asp-for="ConfirmPassword" type="password" class="form-control" id="review" placeholder="تکرار رمز عبور را وارد کنید" required="">
+                                <label for="ConfirmPassword">تکرار رمزعبور</label>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" id="ConfirmPassword" placeholder="تکرار رمز عبور را وارد کنید" required=""><br />
+                                <input id="ConfirmPasswordCheck" type="checkbox" /> نمایش رمز<br />
                                 <br /><span asp-validation-for="ConfirmPassword" class="text-danger"></span><br /><br />
                             </div>
                         </div>
@@ -40,6 +42,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        {
+            const PasswordCheckElement = document.getElementById("PasswordCheck");
+            const PasswordInputElement = document.getElementById("Password");
+
+            const ConfirmPasswordCheckElement = document.getElementById("ConfirmPasswordCheck");
+            const ConfirmPasswordInputElement = document.getElementById("ConfirmPassword");
+
+          
+            PasswordCheckElement.addEventListener("click", () => {
+                if (PasswordCheckElement.checked)
+                    PasswordInputElement.type = "text";
+                else
+                    PasswordInputElement.type = "password";
+            });
+
+            ConfirmPasswordCheckElement.addEventListener("click", () => {
+                if (ConfirmPasswordCheckElement.checked)
+                    ConfirmPasswordInputElement.type = "text";
+                else
+                    ConfirmPasswordInputElement.type = "password";
+            });
+        }
+    </script>
     @section Scripts {
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");

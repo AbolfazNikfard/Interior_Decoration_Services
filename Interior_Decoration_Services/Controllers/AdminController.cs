@@ -2,6 +2,7 @@
 using Interior_Decoration_Services.Enum;
 using Interior_Decoration_Services.Models;
 using Interior_Decoration_Services.Models.View_Models;
+using Interior_Decoration_Services.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace Interior_Decoration_Services.Controllers
     {
         private ProjectContext _context;
         private readonly UserManager<User> _userManager;
+        private const string SaveSampleImagePath = "assets/images/workSample-image";
         public AdminController(ProjectContext context, UserManager<User> userManager)
         {
             _context = context;
@@ -47,6 +49,7 @@ namespace Interior_Decoration_Services.Controllers
                 return StatusCode(500);
             }
         }
+        #region Order
         public IActionResult OrderList(string WhichOrders = "pending")
         {
             try
@@ -111,6 +114,7 @@ namespace Interior_Decoration_Services.Controllers
                 return StatusCode(500);
             }
         }
+        #endregion
         #region EditUser
         [HttpGet]
         public async Task<IActionResult> EditUser(string userEmail)
@@ -226,6 +230,136 @@ namespace Interior_Decoration_Services.Controllers
                 return NotFound();
             }
             return RedirectToAction("Index", "Admin");
+        }
+        #endregion
+        #region WorkSample
+        [HttpGet]
+        public IActionResult AddWorkSample(int? sampleId, string Case)
+        {
+            WorkSamples Sample;
+            if (Case == "Edit")
+            {
+                Sample = _context.workSamples.SingleOrDefault(s => s.Id == sampleId);
+                if (Sample == null)
+                    return NotFound();
+            }
+
+            else if (Case == "Add")
+                Sample = new WorkSamples();
+
+            else
+                return NotFound();
+
+            ViewData["Case"] = Case;
+
+            var groups = _context.groups.ToList();
+            AddWorkSampleViewModel ViewModel = new AddWorkSampleViewModel()
+            {
+                groups = groups,
+                Sample = Sample
+            };
+            return View(ViewModel);
+        }
+        [HttpPost]
+        public IActionResult AddWorkSample([FromForm] AddWorkSampleViewModel sampleModel, string Case, string? groupId)
+        {
+            try
+            {
+                ViewData["Case"] = Case;
+                if (Case == "Add")
+                {
+                    if (sampleModel.SampleImage == null)
+                    {
+                        ModelState.AddModelError("", "لطفا برای نمونه کار عکس انتخاب کنید");
+                        return View(sampleModel);
+                    }
+                    sampleModel.Sample.Image = saveImages.createImage(sampleModel.SampleImage.FileName.ToString(), sampleModel.SampleImage, SaveSampleImagePath);
+                    sampleModel.Sample.createdAt = DateTime.Now;
+                    _context.workSamples.Add(sampleModel.Sample);
+                }
+                else if (Case == "Edit")
+                {
+                    if (sampleModel.SampleImage != null)
+                    {
+                        sampleModel.Sample.Image = saveImages.createImage(sampleModel.SampleImage.FileName.ToString(), sampleModel.SampleImage, SaveSampleImagePath);
+                        sampleModel.Sample.editedAt = DateTime.Now;
+                    }
+                    _context.workSamples.Update(sampleModel.Sample);
+                }
+                else
+                    return NotFound();
+
+                _context.SaveChanges();
+                return Redirect("/Admin/WorkSampleList");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Catched Error: {e.Message}");
+                return StatusCode(500);
+            }
+        }
+        [HttpGet]
+        public IActionResult WorkSampleList(int groupId = 0, string sort = null, int limit = 20, int page = 1)
+        {
+            if (page < 1)
+                return BadRequest(new { StatusCode = 400, message = "page number should be greater than 0" });
+
+            if (limit < 1)
+                return BadRequest(new { StatusCode = 400, message = "limit should be greater than 0" });
+
+            int skip = (page - 1) * limit;
+            double productCount, result;
+
+            IQueryable<WorkSamples> workSampleList;
+
+            if (groupId == 0)
+            {
+                workSampleList = _context.workSamples;
+                productCount = workSampleList.Count();
+            }
+            else
+            {
+                workSampleList = _context.workSamples.Where(ws => ws.groupId == groupId);
+                productCount = workSampleList.Count();
+            }
+
+            ViewData["page"] = page;
+            result = productCount / (double)limit;
+            int pageCount = (int)Math.Ceiling(result);
+            ViewData["pagesCount"] = pageCount;
+
+            List<WorkSamples> WorkSampleList;
+
+            switch (sort)
+            {
+                case "Latest":
+                    WorkSampleList = workSampleList.OrderByDescending(o => o.createdAt).Skip(skip).Take(limit).ToList();
+                    break;
+
+                case "Oldest":
+                    WorkSampleList = workSampleList.OrderBy(o => o.createdAt).Skip(skip).Take(limit).ToList();
+                    break;
+
+                case "LatestByEdit":
+                    WorkSampleList = workSampleList.OrderByDescending(o => o.editedAt).Skip(skip).Take(limit).ToList();
+                    break;
+
+                case "OldestByEdit":
+                    WorkSampleList = workSampleList.OrderBy(o => o.editedAt).Skip(skip).Take(limit).ToList();
+                    break;
+
+                default:
+                    WorkSampleList = workSampleList.Skip(skip).Take(limit).ToList();
+                    break;
+            }
+
+            List<Group> groups = _context.groups.ToList();
+            WorkSampleListViewModel workSampleListViewModel = new WorkSampleListViewModel()
+            {
+                groups = groups,
+                Samples = WorkSampleList
+            };
+            return View(workSampleListViewModel);
         }
         #endregion
         #region Group

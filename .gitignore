@@ -364,3 +364,7 @@ FodyWeavers.xsd
 /Interior_Decoration_Services/wwwroot/assets/images/product-image/*.jpg
 /Interior_Decoration_Services/wwwroot/assets/images/product-image/*.png
 /Interior_Decoration_Services/wwwroot/assets/images/product-image/*.gif
+
+/Interior_Decoration_Services/wwwroot/assets/images/workSample-image/*.jpg
+/Interior_Decoration_Services/wwwroot/assets/images/workSample-image/*.png
+/Interior_Decoration_Services/wwwroot/assets/images/workSample-image/*.gif

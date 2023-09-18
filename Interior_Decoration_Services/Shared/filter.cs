@@ -12,10 +12,10 @@ namespace Interior_Decoration_Services.Shared
                     return products.OrderByDescending(p => p.registerDate).Skip(skip).Take(limit).ToList();
                 case "Oldest":
                     return products.OrderBy(p => p.registerDate).Skip(skip).Take(limit).ToList();
-                //case "ExpensiveToCheap":
-                //    return products.OrderByDescending(p => p.Price).Skip(skip).Take(limit).ToList();
-                //case "CheapToExpensive":
-                //    return products.OrderBy(p => p.Price).Skip(skip).Take(limit).ToList();
+                case "ExpensiveToCheap":
+                    return products.OrderByDescending(p => p.Price).Skip(skip).Take(limit).ToList();
+                case "CheapToExpensive":
+                    return products.OrderBy(p => p.Price).Skip(skip).Take(limit).ToList();
                 case "AlphabetAscending":
                     return products.OrderBy(p => p.Name).Skip(skip).Take(limit).ToList();
                 case "AlphabetDescending":
