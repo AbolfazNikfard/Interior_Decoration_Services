@@ -13,6 +13,7 @@
         public string productImage { get; set; }
         public int productPrice { get; set; }
         public string productUnit { get; set; }
+        public string productUnitOfMeasurement { get; set; }
         public string productSize { get; set; }
         public DateTime orderRegisterDateTime { get; set; }
     }

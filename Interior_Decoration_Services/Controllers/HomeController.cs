@@ -14,7 +14,7 @@ namespace Interior_Decoration_Services.Controllers
         {
             _context = context;
         }
-        public IActionResult Index(int page = 1, int limit = 9, string sort = null, string search = null)
+        public IActionResult Index(int page = 1, int limit = 9, string sort = null, string search = null, string filter = null)
         {
             if (page < 1)
                 return BadRequest(new { StatusCode = 400, message = "page number should be greater than 0" });
@@ -25,10 +25,20 @@ namespace Interior_Decoration_Services.Controllers
 
 
             IQueryable<Product> products;
-            if (search != null)
+            if (search != null && filter == "available")
+            {
+                products = _context.products.Where(p => p.Name.Contains(search) && p.Stock == true);
+                productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.Stock == true).Count();
+            }
+            else if (search != null && filter == null)
             {
                 products = _context.products.Where(p => p.Name.Contains(search));
                 productCount = (double)_context.products.Where(p => p.Name.Contains(search)).Count();
+            }
+            else if (search == null && filter != null)
+            {
+                products = _context.products.Where(p => p.Stock == true);
+                productCount = (double)_context.products.Where(p => p.Stock == true).Count();
             }
             else
             {
@@ -40,9 +50,10 @@ namespace Interior_Decoration_Services.Controllers
             result = productCount / (double)limit;
             int pageCount = (int)Math.Ceiling(result);
             ViewData["pagesCount"] = pageCount;
+
             List<Product> productViewModel;
             if (sort != null)
-                productViewModel = filter.sorted_Products(products, sort, skip, limit);
+                productViewModel = Sort.sorted_Products(products, sort, skip, limit);
             else
                 productViewModel = products.Skip(skip).Take(limit).ToList();
 
@@ -55,8 +66,6 @@ namespace Interior_Decoration_Services.Controllers
             if (page < 1)
                 return BadRequest(new { StatusCode = 400, message = "page number should be greater than 0" });
 
-            //if (limit < 1)
-            //    return BadRequest(new { StatusCode = 400, message = "limit should be greater than 0" });
             int limit = 4;
             int skip = (page - 1) * limit;
             double productCount, result;
@@ -79,31 +88,6 @@ namespace Interior_Decoration_Services.Controllers
             int pageCount = (int)Math.Ceiling(result);
             ViewData["pagesCount"] = pageCount;
 
-            //List<WorkSamples> WorkSampleList;
-
-            //switch (sort)
-            //{
-            //    case "Latest":
-            //        WorkSampleList = workSampleList.OrderByDescending(o => o.createdAt).Skip(skip).Take(limit).ToList();
-            //        break;
-
-            //    case "Oldest":
-            //        WorkSampleList = workSampleList.OrderBy(o => o.createdAt).Skip(skip).Take(limit).ToList();
-            //        break;
-
-            //    case "LatestByEdit":
-            //        WorkSampleList = workSampleList.OrderByDescending(o => o.editedAt).Skip(skip).Take(limit).ToList();
-            //        break;
-
-            //    case "OldestByEdit":
-            //        WorkSampleList = workSampleList.OrderBy(o => o.editedAt).Skip(skip).Take(limit).ToList();
-            //        break;
-
-            //    default:
-            //        WorkSampleList = workSampleList.Skip(skip).Take(limit).ToList();
-            //        break;
-            //}
-
             List<Group> groups = _context.groups.ToList();
             WorkSampleListViewModel workSampleListViewModel = new WorkSampleListViewModel()
             {
@@ -121,6 +105,10 @@ namespace Interior_Decoration_Services.Controllers
             return View();
         }
         public IActionResult RulesAndConditions()
+        {
+            return View();
+        }
+        public IActionResult OurService()
         {
             return View();
         }

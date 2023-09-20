@@ -61,7 +61,7 @@
                         </ul>
                     </div>
                 </li>
-                
+
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="javascript:void(0)">
                         @*<i class="mdi mdi-cart"></i>*@<i class="fa-solid fa-cart-shopping fa-flip-horizontal fa-2xs"></i> <span class="nav-text">محصولات</span> <b class="caret"></b>
@@ -84,25 +84,25 @@
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="javascript:void(0)">
                         <i class="fa-regular fa-clipboard fa-flip-horizontal"></i>
-                        
+
                         <span class="nav-text">سفارشات</span> <b class="caret"></b>
                     </a>
                     <div class="collapse">
                         <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
-                             <li>
+                            <li>
                                 <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="pending" class="sidenav-item-link">
-                            <span>سفارشات در انتظار </span>
-                            </a>
+                                    <span>سفارشات در انتظار </span>
+                                </a>
                             </li>
                             <li>
                                 <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="reffered" class="sidenav-item-link">
                                     <span>سفارشات ارجاع داده شده</span>
                                 </a>
                             </li>
-                              <li>
+                            <li>
                                 <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="doing" class="sidenav-item-link">
-                            <span>سفارشات در حال انجام</span>
-                            </a>
+                                    <span>سفارشات در حال انجام</span>
+                                </a>
                             </li>
                             <li>
                                 <a asp-controller="Admin" asp-action="OrderList" asp-route-WhichOrders="finished" class="sidenav-item-link">
@@ -122,25 +122,25 @@
                         </ul>
                     </div>
                 </li>
-                <li class="has-sub">
-                    <a class="sidenav-item-link" href="#">
-                        @*<i class="mdi mdi-table-large"></i>*@<i class="fa-solid fa-table-list fa-rotate-180 fa-xs"></i> <span class="nav-text">گزارشات جدولی</span> <b class="caret"></b>
-                    </a>
-                    <div class="collapse">
-                        <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
-                            <li>
-                                <a asp-controller="Reports" asp-action="SoldProducts" class="sidenav-item-link">
-                                    <span class="nav-text">تاریخچه سفارشات</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a asp-controller="Reports" asp-action="SoldPerProduct" class="sidenav-item-link">
-                                    <span>فروش بر اساس محصول</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                @*<li class="has-sub">
+                <a class="sidenav-item-link" href="#">
+                <i class="fa-solid fa-table-list fa-rotate-180 fa-xs"></i> <span class="nav-text">گزارشات جدولی</span> <b class="caret"></b>
+                </a>
+                <div class="collapse">
+                <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
+                <li>
+                <a asp-controller="Reports" asp-action="SoldProducts" class="sidenav-item-link">
+                <span class="nav-text">تاریخچه سفارشات</span>
+                </a>
                 </li>
+                <li>
+                <a asp-controller="Reports" asp-action="SoldPerProduct" class="sidenav-item-link">
+                <span>فروش بر اساس محصول</span>
+                </a>
+                </li>
+                </ul>
+                </div>
+                </li>*@
                 <li class="has-sub">
                     <a class="sidenav-item-link" href="#">
                         @*<i class="mdi mdi-chart-bar"></i>*@<i class="fa-solid fa-chart-line fa-flip-horizontal fa-xs"></i> <span class="nav-text">گزارشات گرافیکی</span> <b class="caret"></b>
@@ -148,13 +148,13 @@
                     <div class="collapse">
                         <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
                             <li>
-                                <a asp-controller="Reports" asp-action="SoldChart" class="sidenav-item-link">
-                                    <span class="nav-text">فروش</span>
+                                <a asp-controller="Reports" asp-action="OrderChart" class="sidenav-item-link">
+                                    <span class="nav-text">سفارشات ثبت شده</span>
                                 </a>
                             </li>
                             <li>
-                                <a asp-controller="Reports" asp-action="bestSellingProducts" class="sidenav-item-link">
-                                    <span>پرفروشترین محصولات</span>
+                                <a asp-controller="Reports" asp-action="MostOrderedProducts" class="sidenav-item-link">
+                                    <span>بیشترین محصولات سفارش داده شده</span>
                                 </a>
                             </li>
                         </ul>

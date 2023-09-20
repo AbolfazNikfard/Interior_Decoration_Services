@@ -3,6 +3,6 @@
     public class SoldDateTimeWithSoldNumberViewModel
     {
         public DateTime soldDateTime { get; set; }
-        public int soldNumber { get; set; }
+        //public int soldNumber { get; set; }
     }
 }

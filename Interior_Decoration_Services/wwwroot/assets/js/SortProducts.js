@@ -1,12 +1,15 @@
 ﻿{
-    let currentUrl, urlObject, searchParams, selectedSortOptionValue, updatedUrl, paramName = "sort";
     const selectSortOptionElement = document.getElementById("SortProduct");
+    const FilterCheckBoxElement = document.getElementById("filterCheckbox");
+    const currentUrl = window.location.href;
+    const urlObject = new URL(currentUrl);
+    const searchParams = urlObject.searchParams;
+
+    let selectedSortOptionValue, updatedUrl, sortParam = "sort", filterParam = "filter";
     selectedSortOptionValue = selectSortOptionElement.value;
-    currentUrl = window.location.href;
-    urlObject = new URL(currentUrl);
-    searchParams = urlObject.searchParams;
-    if (searchParams.has(paramName)) {
-        let paramValue = searchParams.get(paramName);
+
+    if (searchParams.has(sortParam)) {
+        let paramValue = searchParams.get(sortParam);
         let optionElement;
         switch (paramValue) {
             case "Newest":
@@ -33,19 +36,45 @@
         selectSortOptionElement.children[0].removeAttribute("selected");
         optionElement.setAttribute("selected", "");
     }
-    selectSortOptionElement.addEventListener("change", function () {
-        selectedSortOptionValue = selectSortOptionElement.value;
-        currentUrl = window.location.href;
-        urlObject = new URL(currentUrl);
-        searchParams = urlObject.searchParams;
 
-        if (searchParams.has(paramName)) searchParams.set(paramName, selectedSortOptionValue);
-        else searchParams.append(paramName, selectedSortOptionValue);
+    if (searchParams.has(filterParam)) {
+        let paramValue = searchParams.get(filterParam);
+        if (paramValue === "available")
+            FilterCheckBoxElement.checked = true;
+    }
+    selectSortOptionElement.addEventListener("change", function () {
+
+        selectedSortOptionValue = selectSortOptionElement.value;
+
+        if (searchParams.has(sortParam)) {
+            if (selectedSortOptionValue === "null")
+                searchParams.delete(sortParam)
+
+            else
+                searchParams.set(sortParam, selectedSortOptionValue);
+        }
+        else {
+            if (selectedSortOptionValue !== "null")
+                searchParams.append(sortParam, selectedSortOptionValue);
+        }
 
         updatedUrl = urlObject.origin + urlObject.pathname + "?" + searchParams.toString();
         window.location.href = updatedUrl;
     });
-    function getOptionByValue(value,selectElement) {
+
+    FilterCheckBoxElement.addEventListener("click", () => {
+        if (FilterCheckBoxElement.checked) {
+            if (searchParams.has(filterParam)) searchParams.set(filterParam, "available");
+            else searchParams.append(filterParam, "available");
+        }
+        else {
+            if (searchParams.has(filterParam))
+                searchParams.delete(filterParam);
+        }
+        updatedUrl = urlObject.origin + urlObject.pathname + "?" + searchParams.toString();
+        window.location.href = updatedUrl;
+    });
+    function getOptionByValue(value, selectElement) {
         for (const option of selectElement.options) {
             if (option.value === value) {
                 return option;

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InteriorDecorationServices.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20230913093238_Add_WorkSamples_Table")]
-    partial class AddWorkSamplesTable
+    [Migration("20230919145811_Initial_Database")]
+    partial class InitialDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -171,6 +171,9 @@ namespace InteriorDecorationServices.Migrations
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SizeUnit")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Stock")
                         .HasColumnType("bit");
 
@@ -178,6 +181,10 @@ namespace InteriorDecorationServices.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnitOFMeasurement")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("groupId")
@@ -319,6 +326,12 @@ namespace InteriorDecorationServices.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("createdAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("editedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("groupId")
                         .HasColumnType("int");
 
@@ -326,7 +339,7 @@ namespace InteriorDecorationServices.Migrations
 
                     b.HasIndex("groupId");
 
-                    b.ToTable("WorkSamples");
+                    b.ToTable("workSamples");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

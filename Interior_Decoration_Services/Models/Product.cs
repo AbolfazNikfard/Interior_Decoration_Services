@@ -20,9 +20,10 @@ namespace Interior_Decoration_Services.Models
         //public UnitOFMassMeasurement WeightMassUnit { get; set; }
         public int Price { get; set; }
         public string? Size { get; set; }
+        public string? UnitOFMeasurement { get; set; }
         public string? Material { get; set; }
         public string? Color { get; set; }
-        public string? Unit { get; set; }
+        public string Unit { get; set; }
         public bool Stock { get; set; }
         //public UnitOFMassMeasurement StockMassUnit { get; set; }
         //public AcceptProduct confirmation { get; set; }

@@ -94,7 +94,8 @@ namespace Interior_Decoration_Services.Controllers
                 productName = product.Name,
                 productPrice = product.Price,
                 productUnit = product.Unit,
-                productSize = product.Size
+                productSize = product.Size,
+                productUnitOfMeasurement = product.UnitOFMeasurement
             };
             return View(orderDetail);
         }

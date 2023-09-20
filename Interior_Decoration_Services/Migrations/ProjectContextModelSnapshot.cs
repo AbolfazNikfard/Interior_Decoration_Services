@@ -168,6 +168,9 @@ namespace InteriorDecorationServices.Migrations
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SizeUnit")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Stock")
                         .HasColumnType("bit");
 
@@ -175,6 +178,10 @@ namespace InteriorDecorationServices.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnitOFMeasurement")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("groupId")

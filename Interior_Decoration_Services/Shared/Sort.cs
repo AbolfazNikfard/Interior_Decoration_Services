@@ -2,7 +2,7 @@
 
 namespace Interior_Decoration_Services.Shared
 {
-    public static class filter
+    public static class Sort
     {
         public static List<Product> sorted_Products(IQueryable<Product> products, string sort, int skip, int limit)
         {

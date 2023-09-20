@@ -12,32 +12,41 @@
                 <div class="card card-default" id="user-activity">
                     <div class="no-gutters">
                         <div>
-                            <form asp-controller="Reports" asp-action="SoldChart" method="post">
-                                <div class="card-header justify-content-between">
-                                    <h2>فعالیت کاربر</h2>
-                                    @*<div class="date-range-report"><span></span></div>*@
-                                    @*<span class="date-range-report">چینش بر اساس</span>*@
-                                    <div class="ec-select-inner">
-                                        <select asp-for="@Model[0].filterMessage" id="filterSelect">
-                                            <option value="Today">امروز</option>
-                                            <option value="Weekly">هفتگی</option>
-                                            <option value="Monthly"> ماهانه</option>
-                                            <option value="Yearly">سالانه</option>
-                                        </select>
+                            @*<form asp-controller="Reports" asp-action="OrderChart" method="post">*@
+                            <div class="card-header justify-content-between">
+                                <div class="ec-select-inner">
+                                    <select id="OrderFilterSelect">
+                                        <option value="registered">سفارشات ثبت شده</option>
+                                        <option value="pending">سفارشات درانتظار</option>
+                                        <option value="canceled">سفارشات لغو شده</option>
+                                        <option value="rejected">سفارشات رد شده</option>
+                                        <option value="finished">سفارشات به اتمام رسیده</option>
+                                        <option value="doing">سفارشات در حال انجام</option>
+                                        <option value="reffered">سفارشات ارجاع داده شده</option>
 
+                                    </select>
+                                </div>
+                                <div class="ec-select-inner">
+                                    <select id="periodSelect">
+                                        <option value="Today">امروز</option>
+                                        <option value="Weekly">هفتگی</option>
+                                        <option value="Monthly"> ماهانه</option>
+                                        <option value="Yearly">سالانه</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content" id="userActivityContent">
+                                    <div class="tab-pane fade show active" id="user" role="tabpanel">
+                                        <canvas class="chartjs" id="activity"></canvas>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="tab-content" id="userActivityContent">
-                                        <div class="tab-pane fade show active" id="user" role="tabpanel">
-                                            <canvas class="chartjs" id="activity"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer d-flex flex-wrap bg-white border-top">
-                                    <button type="submit" class="btn btn-primary">به روز رسانی</button>
-                                </div>
-                            </form>
+                            </div>
+                            @*<div class="card-footer d-flex flex-wrap bg-white border-top">
+                                <button type="submit" class="btn btn-primary">به روز رسانی</button>
+                            </div>*@
+                            @*</form>*@
                         </div>
                     </div>
                 </div>
@@ -48,6 +57,7 @@
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="~/AdminPanel/assets/js/filter.js?version=3"></script>
     <script>
         var activity = document.getElementById("activity");
         if (activity !== null) {
@@ -59,7 +69,7 @@
                     labels: @Html.Raw(XLabels),
                     datasets: [
                         {
-                            label: "تعداد فروش",
+                            label: "تعداد سفارش",
                             backgroundColor: "transparent",
                             borderColor: "rgba(82, 136, 255, .8)",
                             data: @Html.Raw(YValues),

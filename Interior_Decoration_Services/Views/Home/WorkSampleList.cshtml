@@ -3,6 +3,27 @@
     ViewData["Title"] = "WorkSampleList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- Breadcrumb Start -->
+<div class="bread_crumb blur-up lazyload">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 sec_low">
+                <div class="functionalities">
+                    <ul id="breadcrumb" class="breadcrumb">
+                        <li><a title="Home" href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                        <li><strong><i class="fa fa-angle-double-right" aria-hidden="true"></i>نمونه کارها</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="page-title">
+                    <h2>نمونه کارها</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Start -->
 <section class="portfolio-section cmn_bg">
     <div class="container">
         <div class="center_tag" id="form2">
@@ -59,66 +80,66 @@
 
                 }
             }
-            @*else
-            {
-            if (page >= 4)
-            {
-            @for (int i = page - 3; i <= page; i++)
-            {
-            if (i == page)
-            {
-            <li class="page-item active"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
             else
             {
-            <li class="page-item"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
-            }
+                if (page >= 4)
+                {
+                    @for (int i = page - 3; i <= page; i++)
+                    {
+                        if (i == page)
+                        {
+                            <button style="cursor:pointer;background-color:#f7e294;border:1px solid #f7e294" class="cdp_i paginationBtn active" onclick="selectPage(this)">@i</button>
+                        }
+                        else
+                        {
+                            <button style="cursor:pointer" class="cdp_i paginationBtn" onclick="selectPage(this)">@i</button>
+                        }
+                    }
 
+                }
+                else
+                {
+                    @for (int i = 1; i <= page; i++)
+                    {
+                        if (i == page)
+                        {
+                            <button style="cursor:pointer;background-color:#f7e294;border:1px solid #f7e294" class="cdp_i paginationBtn active" onclick="selectPage(this)">@i</button>
+                        }
+                        else
+                        {
+                            <button style="cursor:pointer" class="cdp_i paginationBtn" onclick="selectPage(this)">@i</button>
+                        }
+                    }
+                }
+                if (page + 4 <= pageCount)
+                {
+                    @for (int i = page + 1; i <= page + 4; i++)
+                    {
+                        if (i == page)
+                        {
+                            <button style="cursor:pointer;background-color:#f7e294;border:1px solid #f7e294" class="cdp_i paginationBtn active" onclick="selectPage(this)">@i</button>
+                        }
+                        else
+                        {
+                            <button style="cursor:pointer" class="cdp_i paginationBtn" onclick="selectPage(this)">@i</button>
+                        }
+                    }
+                }
+                else
+                {
+                    @for (int i = page + 1; i <= pageCount; i++)
+                    {
+                        if (i == page)
+                        {
+                            <button style="cursor:pointer;background-color:#f7e294;border:1px solid #f7e294" class="cdp_i paginationBtn active" onclick="selectPage(this)">@i</button>
+                        }
+                        else
+                        {
+                            <button style="cursor:pointer" class="cdp_i paginationBtn" onclick="selectPage(this)">@i</button>
+                        }
+                    }
+                }
             }
-            else
-            {
-            @for (int i = 1; i <= page; i++)
-            {
-            if (i == page)
-            {
-            <li class="page-item active"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
-            else
-            {
-            <li class="page-item"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
-            }
-            }
-            if (page + 4 <= pageCount)
-            {
-            @for (int i = page + 1; i <= page + 4; i++)
-            {
-            if (i == page)
-            {
-            <li class="page-item active"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
-            else
-            {
-            <li class="page-item"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
-            }
-            }
-            else
-            {
-            @for (int i = page + 1; i <= pageCount; i++)
-            {
-            if (i == page)
-            {
-            <li class="page-item active"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
-            else
-            {
-            <li class="page-item"><button class="page-link" onclick="selectPage(this)">@i</button></li>
-            }
-            }
-            }
-            }*@
             <button style="cursor:pointer" class="cdp_i" onclick="nextPage()">بعدی<i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
         </div>
     </div>

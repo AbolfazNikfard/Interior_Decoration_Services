@@ -217,6 +217,27 @@ namespace InteriorDecorationServices.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "workSamples",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    editedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    groupId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_workSamples", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_workSamples_groups_groupId",
+                        column: x => x.groupId,
+                        principalTable: "groups",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "products",
                 columns: table => new
                 {
@@ -227,9 +248,11 @@ namespace InteriorDecorationServices.Migrations
                     Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<int>(type: "int", nullable: false),
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UnitOFMeasurement = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SizeUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Stock = table.Column<bool>(type: "bit", nullable: false),
                     registerDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
@@ -250,34 +273,6 @@ namespace InteriorDecorationServices.Migrations
                         column: x => x.subGroupId,
                         principalTable: "subGroups",
                         principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "carts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    productId = table.Column<int>(type: "int", nullable: false),
-                    buyerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_carts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_carts_buyers_buyerId",
-                        column: x => x.buyerId,
-                        principalTable: "buyers",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_carts_products_productId",
-                        column: x => x.productId,
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -329,17 +324,17 @@ namespace InteriorDecorationServices.Migrations
                 name: "orders",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    Number = table.Column<int>(type: "int", nullable: false),
-                    orderDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     productId = table.Column<int>(type: "int", nullable: false),
                     buyerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_orders", x => x.id);
+                    table.PrimaryKey("PK_orders", x => x.Id);
                     table.ForeignKey(
                         name: "FK_orders_buyers_buyerId",
                         column: x => x.buyerId,
@@ -400,16 +395,6 @@ namespace InteriorDecorationServices.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_carts_buyerId",
-                table: "carts",
-                column: "buyerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_carts_productId",
-                table: "carts",
-                column: "productId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_comments_productId",
                 table: "comments",
                 column: "productId");
@@ -443,6 +428,11 @@ namespace InteriorDecorationServices.Migrations
                 name: "IX_subGroups_parentGroupId",
                 table: "subGroups",
                 column: "parentGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_workSamples_groupId",
+                table: "workSamples",
+                column: "groupId");
         }
 
         /// <inheritdoc />
@@ -464,9 +454,6 @@ namespace InteriorDecorationServices.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "carts");
-
-            migrationBuilder.DropTable(
                 name: "comments");
 
             migrationBuilder.DropTable(
@@ -474,6 +461,9 @@ namespace InteriorDecorationServices.Migrations
 
             migrationBuilder.DropTable(
                 name: "orders");
+
+            migrationBuilder.DropTable(
+                name: "workSamples");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

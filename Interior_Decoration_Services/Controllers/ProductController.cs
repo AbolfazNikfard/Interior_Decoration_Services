@@ -17,7 +17,7 @@ namespace Interior_Decoration_Services.Controllers
             _userManager = userManager;
         }
         [HttpGet]
-        public IActionResult ShowProductByGroupId(int groupId, int page = 1, int limit = 9, string sort = null, string search = null)
+        public IActionResult ShowProductByGroupId(int groupId, int page = 1, int limit = 9, string sort = null, string search = null, string filter = null)
         {
             try
             {
@@ -31,15 +31,25 @@ namespace Interior_Decoration_Services.Controllers
                 double productCount, result;
 
                 IQueryable<Product> products;
-                if (search != null)
+                if (search != null && filter == "available")
                 {
-                    products = _context.products.Where(p => p.groupId == groupId && p.Name.Contains(search));
-                    productCount = (double)_context.products.Where(p => p.groupId == groupId && p.Name.Contains(search)).Count();
+                    products = _context.products.Where(p => p.Name.Contains(search) && p.Stock == true);
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.Stock == true).Count();
+                }
+                else if (search != null && filter == null)
+                {
+                    products = _context.products.Where(p => p.Name.Contains(search));
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search)).Count();
+                }
+                else if (search == null && filter != null)
+                {
+                    products = _context.products.Where(p => p.Stock == true);
+                    productCount = (double)_context.products.Where(p => p.Stock == true).Count();
                 }
                 else
                 {
-                    products = _context.products.Where(p => p.groupId == groupId);
-                    productCount = (double)_context.products.Where(p => p.groupId == groupId).Count();
+                    products = _context.products;
+                    productCount = (double)_context.products.Count();
                 }
 
                 ViewData["page"] = page;
@@ -49,7 +59,7 @@ namespace Interior_Decoration_Services.Controllers
 
                 List<Product> productViewModel;
                 if (sort != null)
-                    productViewModel = filter.sorted_Products(products, sort, skip, limit);
+                    productViewModel = Sort.sorted_Products(products, sort, skip, limit);
                 else
                     productViewModel = products.Skip(skip).Take(limit).ToList();
 
@@ -61,7 +71,7 @@ namespace Interior_Decoration_Services.Controllers
                 return StatusCode(500);
             }
         }
-        public IActionResult ShowProductBySubGroupId(int subGroupId, int page = 1, int limit = 9, string sort = null, string search = null)
+        public IActionResult ShowProductBySubGroupId(int subGroupId, int page = 1, int limit = 9, string sort = null, string search = null, string filter = null)
         {
             try
             {
@@ -75,15 +85,25 @@ namespace Interior_Decoration_Services.Controllers
                 double productCount, result;
 
                 IQueryable<Product> products;
-                if (search != null)
+                if (search != null && filter == "available")
                 {
-                    products = _context.products.Where(p => p.subGroupId == subGroupId && p.Name.StartsWith(search));
-                    productCount = (double)_context.products.Where(p => p.subGroupId == subGroupId && p.Name.StartsWith(search)).Count();
+                    products = _context.products.Where(p => p.Name.Contains(search) && p.Stock == true);
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.Stock == true).Count();
+                }
+                else if (search != null && filter == null)
+                {
+                    products = _context.products.Where(p => p.Name.Contains(search));
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search)).Count();
+                }
+                else if (search == null && filter != null)
+                {
+                    products = _context.products.Where(p => p.Stock == true);
+                    productCount = (double)_context.products.Where(p => p.Stock == true).Count();
                 }
                 else
                 {
-                    products = _context.products.Where(p => p.subGroupId == subGroupId);
-                    productCount = (double)_context.products.Where(p => p.subGroupId == subGroupId).Count();
+                    products = _context.products;
+                    productCount = (double)_context.products.Count();
                 }
 
                 ViewData["page"] = page;
@@ -93,7 +113,7 @@ namespace Interior_Decoration_Services.Controllers
 
                 List<Product> productViewModel;
                 if (sort != null)
-                    productViewModel = filter.sorted_Products(products, sort, skip, limit);
+                    productViewModel = Sort.sorted_Products(products, sort, skip, limit);
                 else
                     productViewModel = products.Skip(skip).Take(limit).ToList();
 

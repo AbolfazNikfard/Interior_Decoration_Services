@@ -74,7 +74,7 @@
                                                 <td class="text-center"><strong>شناسه</strong></td>
                                                 <td class="text-center"><strong>تصویر</strong></td>
                                                 <td class="text-center"><strong>نام</strong></td>
-                                                <td class="text-center"><strong>واحد</strong></td>
+                                                @*<td class="text-center"><strong>واحد</strong></td>*@
                                                 <td class="text-center"><strong>اندازه</strong></td>
                                                 <td class="text-center"><strong>قیمت</strong></td>
                                             </tr>
@@ -87,33 +87,19 @@
                                                          src="~/assets/images/product-image/@Model.productImage" alt="">
                                                 </td>
                                                 <td class="text-center">@Model.productName</td>
-                                                <td class="text-center">@Model.productUnit</td>
-                                                @if (Model.productUnit != null && Model.productSize != null)
+                                                @*<td class="text-center">@Model.productUnit</td>*@
+                                                @if (Model.productSize != null)
                                                 {
-                                                    <td class="text-center">هر @Model.productUnit @Model.productSize متر</td>
+                                                    <td class="text-center">هر @Model.productUnit @Model.productSize @Model.productUnitOfMeasurement</td>
                                                 }
-                                                else if (Model.productUnit == null && Model.productSize != null)
-                                                {
-                                                    <td class="text-center">@Model.productSize متر</td>
-                                                }
-                                                @if (Model.productUnit != null)
-                                                {
-                                                    <td class="text-center">
-                                                        هر @Model.productUnit @{
-                                                            ShowReadablePrice = (ulong)Model.productPrice;
-                                                        }
-                                                        @ShowReadablePrice.ToMoreReadable() تومان
-                                                    </td>
-                                                }
-                                                else
-                                                {
-                                                    <td class="text-center">
-                                                        @{
-                                                            ShowReadablePrice = (ulong)Model.productPrice;
-                                                        }
-                                                        @ShowReadablePrice.ToMoreReadable() تومان
-                                                    </td>
-                                                }
+
+                                                <td class="text-center">
+                                                    هر @Model.productUnit @{
+                                                        ShowReadablePrice = (ulong)Model.productPrice;
+                                                    }
+                                                    @ShowReadablePrice.ToMoreReadable() تومان
+                                                </td>
+
                                             </tr>
                                         </tbody>
                                     </table>

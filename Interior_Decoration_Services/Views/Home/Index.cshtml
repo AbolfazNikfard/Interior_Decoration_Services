@@ -1,5 +1,44 @@
-﻿@model List<Product>
+﻿@inject SignInManager<User> SignInManager
+@model List<Product>
 @{
     ViewData["Title"] = "صفحه اصلی";
 }
+<div class="ecommerce-layout">
+    <div class="main-header">
+        <div class="bottom-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 ecommerce-sidebar set-order-2">
+                        <button class="btn btn-block btn_inverse toggle-btn">
+                            <i class="fa fa-bars"></i>فروشگاه بر اساس طبقه بندی
+                        </button>
+                    </div>
+                    <div class="col-md-9 set-order-1">
+                        <div class="ecommerce-from">
+                            <div class="input-group">
+                                <input id="search_input" type="text" class="form-control" placeholder="جستجو محصولات......">
+
+                                <div class="input-group-append">
+                                    <button id="search_button" class="btn btn_inverse"> جستجو <i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <form asp-controller="Account" asp-action="LogOut" method="post">
+                                <button class="btn btn_white" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i>خروج</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a class="btn btn_white" href="Account/login"><i class="fa fa-user-o"></i>ورود</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/js/search.js?version=2"></script>
+
 @await Component.InvokeAsync("ShowProductByGroupComponent",Model)
