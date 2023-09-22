@@ -41,6 +41,7 @@
                                                         @if (Model.Sample.Image != null)
                                                         {
                                                             <img class="ec-image-preview" src="~/assets/images/workSample-image/@(Model.Sample.Image)" alt="SampleImage">
+                                                            <input style="display:none" asp-for="@Model.Sample.Image" value="@Model.Sample.Image" />
                                                         }
                                                         else
                                                         {

@@ -261,7 +261,7 @@ namespace Interior_Decoration_Services.Controllers
             return View(ViewModel);
         }
         [HttpPost]
-        public IActionResult AddWorkSample([FromForm] AddWorkSampleViewModel sampleModel, string Case, string? groupId)
+        public IActionResult AddWorkSample([FromForm] AddWorkSampleViewModel sampleModel, string Case)
         {
             try
             {
@@ -284,6 +284,7 @@ namespace Interior_Decoration_Services.Controllers
                         sampleModel.Sample.Image = saveImages.createImage(sampleModel.SampleImage.FileName.ToString(), sampleModel.SampleImage, SaveSampleImagePath);
                         sampleModel.Sample.editedAt = DateTime.Now;
                     }
+
                     _context.workSamples.Update(sampleModel.Sample);
                 }
                 else
@@ -360,6 +361,16 @@ namespace Interior_Decoration_Services.Controllers
                 Samples = WorkSampleList
             };
             return View(workSampleListViewModel);
+        }
+        [HttpGet]
+        public IActionResult DeleteSample(int sampleId)
+        {
+            var sample = _context.workSamples.SingleOrDefault(s => s.Id == sampleId);
+            if (sample == null)
+                return NotFound();
+            _context.workSamples.Remove(sample);
+            _context.SaveChanges();
+            return Redirect("/Admin/WorkSampleList");
         }
         #endregion
         #region Group
