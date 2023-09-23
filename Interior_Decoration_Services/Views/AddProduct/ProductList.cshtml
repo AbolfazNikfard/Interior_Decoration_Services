@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "لیست محصولات";
     Layout = "~/Views/Shared/AdminPanel.cshtml";
-    //ulong ShowReadablePrice;
 }
 <div class="ec-content-wrapper">
     <div class="content">
@@ -25,13 +24,7 @@
                                         <th>شناسه</th>
                                         <th>محصولات</th>
                                         <th>نام</th>
-                                        @* <th>وزن</th> *@
-                                        @*<th>قیمت(تومان)</th>*@
                                         <th>موجودی</th>
-                                        @* @if (User.IsInRole("Admin"))
-                                        {
-                                        <th>فروشنده</th>
-                                        } *@
                                         <th>تاریخ ثبت</th>
                                         <th>فعالیت</th>
                                     </tr>
@@ -46,10 +39,6 @@
                                                      alt="Product Image">
                                             </td>
                                             <td>@Model[i].Name</td>
-                                            @* @{
-                                        ShowReadablePrice = (ulong)Model[i].Price;
-                                        }
-                                        <td>@ShowReadablePrice.ToMoreReadable()</td>*@
 
                                             @if (Model[i].Stock)
                                             {
@@ -75,7 +64,6 @@
                                                         <a asp-controller="AddProduct" asp-action="EditProduct" asp-route-productId="@Model[i].id" asp-route-message="Edit" class="dropdown-item">ویرایش</a>
                                                         <a asp-controller="AddProduct" asp-action="DeleteProduct" asp-route-productId="@Model[i].id" class="dropdown-item">حذف</a>
 
-                                                        @*<button onclick="deleteProductEvent(@Model[i].id)" class="dropdown-item">حذف</button>*@
                                                     </div>
                                                 </div>
                                             </td>

@@ -1,5 +1,5 @@
 ﻿@model List<Product>
-@*@{
-    ViewData["Title"] = "میوه جات";
-}*@
+@{
+    ViewData["Title"] = "نمایش محصولات بر اساس گروه";
+}
 @await Component.InvokeAsync("ShowProductByGroupComponent",Model);

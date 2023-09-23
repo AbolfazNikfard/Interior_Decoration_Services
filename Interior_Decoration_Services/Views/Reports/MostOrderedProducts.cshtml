@@ -1,6 +1,6 @@
 ﻿@model List<BarChartViewModel>
 @{
-    ViewData["Title"] = "bestSellers";
+    ViewData["Title"] = "پرسفارش ترین محصولات";
     Layout = "~/Views/Shared/AdminPanel.cshtml";
     var XLabels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Lable).ToList());
     var YValues = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Quantity).ToList());

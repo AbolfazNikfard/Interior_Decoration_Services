@@ -1,21 +1,16 @@
 ﻿using Interior_Decoration_Services.Data;
 using Interior_Decoration_Services.Models;
-using Interior_Decoration_Services.Models.View_Models;
 using Interior_Decoration_Services.Shared;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
 
 namespace Interior_Decoration_Services.Controllers
 {
     public class ProductController : Controller
     {
         private ProjectContext _context;
-        private readonly UserManager<User> _userManager;
-        public ProductController(ProjectContext context, UserManager<User> userManager)
+        public ProductController(ProjectContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
         [HttpGet]
         public IActionResult ShowProductByGroupId(int groupId, int page = 1, int limit = 9, string sort = null, string search = null, string filter = null)
@@ -132,12 +127,6 @@ namespace Interior_Decoration_Services.Controllers
             {
                 var product = _context.products.Where(p => p.id == productId).SingleOrDefault();
                 if (product == null) { return NotFound(); }
-                List<Comment> comments = _context.comments.Where(c => c.productId == productId).ToList();
-                ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel
-                {
-                    product = product,
-                    comments = comments,
-                };
                 return View(product);
             }
             catch (Exception e)

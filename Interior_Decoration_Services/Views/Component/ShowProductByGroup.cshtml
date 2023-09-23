@@ -1,7 +1,5 @@
 ﻿@model List<Product>
-@{
-    ViewData["Title"] = "محصولات";
-}
+
 <section class="section-b-space cmn_bg_yellow shop_page">
 
     <ul class="plus_decore">
@@ -29,52 +27,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- color filter start here -->
-                            @* <div class="collection-collapse-block open">
-                        <h3 class="collapse-block-title">رنگ</h3>
-                        <div class="collection-collapse-block-content">
-                        <div class="color-selector">
-                        <ul>
-                        <li class="color-1 active"></li>
-                        <li class="color-2"></li>
-                        <li class="color-3"></li>
-                        <li class="color-4"></li>
-                        <li class="color-5"></li>
-                        <li class="color-6"></li>
-                        <li class="color-7"></li>
-                        </ul>
-                        </div>
-                        </div>
-                        </div>*@
-                            <!-- price filter start here -->
-                            @* <div class="collection-collapse-block border-0 open">
-                        <h3 class="collapse-block-title">قیمت</h3>
-                        <div class="collection-collapse-block-content">
-                        <div class="collection-brand-filter">
-                        <div class="custom-control custom-checkbox collection-filter-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="hundred">
-                        <label class="custom-control-label" for="hundred">10 تومان - 100 تومان</label>
-                        </div>
-                        <div class="custom-control custom-checkbox collection-filter-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="twohundred">
-                        <label class="custom-control-label" for="twohundred">100 تومان - 200 تومان</label>
-                        </div>
-                        <div class="custom-control custom-checkbox collection-filter-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="threehundred">
-                        <label class="custom-control-label" for="threehundred">200 تومان - 300 تومان</label>
-                        </div>
-                        <div class="custom-control custom-checkbox collection-filter-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="fourhundred">
-                        <label class="custom-control-label" for="fourhundred">300 تومان - 400 تومان</label>
-                        </div>
-                        <div class="custom-control custom-checkbox collection-filter-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="fourhundredabove">
-                        <label class="custom-control-label" for="fourhundredabove">بالاتر از 400 تومان</label>
-                        </div>
-                        </div>
-                        </div>
-                        </div>*@
-
                         </div>
 
                         <!-- side-bar banner end here -->
@@ -93,9 +45,6 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="product-filter-content">
-                                                        @* <div class="search-count">
-                                                    <h5>نمایش محصولات 1-24 از 10 نتیجه</h5>
-                                                    </div>*@
                                                         <div class="product-page-per-view">
                                                             <select id="SelectLimitOfPage">
                                                                 <option value="9">9 محصول در هر صفحه</option>
@@ -110,12 +59,10 @@
                                                                 <option value="null" selected>مرتب سازی</option>
                                                                 <option value="Newest">جدیدترین</option>
                                                                 <option value="Oldest"> قدیمی ترین</option>
-                                                                <option value="ExpensiveToCheap"> گران ترین</option>
-                                                                <option value="CheapToExpensive"> ارزان ترین</option>
                                                                 <option value="AlphabetAscending">نام، الف تا ی</option>
                                                                 <option value="AlphabetDescending">نام، ی تا الف</option>
-                                                                @* <option value="CheapToExpensive">قیمت، کم به زیاد</option>
-                                                            <option value="ExpensiveToCheap">قیمت، زیاد به کم</option>*@
+                                                                <option value="CheapToExpensive">قیمت، کم به زیاد</option>
+                                                                <option value="ExpensiveToCheap">قیمت، زیاد به کم</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -130,10 +77,10 @@
                                                         <div class="product-box" data-aos="zoom-out">
                                                             <div class="img-wrapper">
                                                                 <div class="front">
-                                                                    <a href="#"><img style="width:255px;height:350px" src="~/assets/images/product-image/@(product.productImage)" class="img-fluid" alt="productImage"></a>
+                                                                    <a href="/Product/ProductDetails?productId=@(product.id)"><img style="width:255px;height:350px" src="~/assets/images/product-image/@(product.productImage)" class="img-fluid" alt="productImage"></a>
                                                                     <div>
                                                                         <a href="/Product/ProductDetails?productId=@(product.id)" class="add_hover add_search" title="جزییات"><i class="fa fa-search" aria-hidden="true"></i></a>
-                                                                        <a href="#" title="لیست علاقه" class="add_hover add_wish"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                                                        <a href="#" title="لیست علاقه مندی" class="add_hover add_wish"><i class="fa fa-heart" aria-hidden="true"></i></a>
                                                                         <a href="#" title="سبد خرید" class="add_hover"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                                                                     </div>
                                                                 </div>
@@ -144,7 +91,7 @@
                                                                     <p>@product.Description</p>
                                                                     <h5>
                                                                         قیمت : <span>
-                                                                            هر @product.Unit 
+                                                                            هر @product.Unit
                                                                             @{
                                                                                 ulong ShowReadablePrice = (ulong)product.Price;
                                                                             }

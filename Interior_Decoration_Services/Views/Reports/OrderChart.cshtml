@@ -1,6 +1,6 @@
 ﻿@model List<LineChartViewModel>
 @{
-    ViewData["Title"] = "SoldChart";
+    ViewData["Title"] = "گزارش سفارشات";
     Layout = "~/Views/Shared/AdminPanel.cshtml";
     var XLabels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.lable).ToList());
     var YValues = Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.data).ToList());

@@ -1,6 +1,6 @@
 ﻿@model AddProductViewModel
 @{
-    ViewData["Title"] = "addProduct";
+    ViewData["Title"] = "اضافه کردن محصول";
     Layout = "~/Views/Shared/AdminPanel.cshtml";
 }
 <form class="row g-3" asp-controller="AddProduct" asp-action="addProduct" asp-route-message="@ViewData["Message"]" enctype="multipart/form-data" method="post">
@@ -24,8 +24,7 @@
                                     <div class="ec-vendor-img-upload">
                                         <div class="ec-vendor-main-img">
                                             <div class="avatar-upload">
-                                                @* @if (ViewData["Message"].Equals("Add"))
-                                                { *@
+                                               
                                                 <div class="avatar-edit">
 
                                                     <input asp-for="@Model.productImage" type="file" id="imageUpload"

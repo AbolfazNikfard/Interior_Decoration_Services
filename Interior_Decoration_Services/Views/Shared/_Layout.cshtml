@@ -5,23 +5,23 @@
 
     <meta charset="utf-8">
     <meta name="author" content="pixelstrap">
-    <meta name="description" content="OIDS | Online Interior Decoration Service">
-    <meta name="keywords" content="OIDS | Online Interior Decoration Service">
+    <meta name="description" content="وبسایت طراحی، تولید و اجرا دکوراسیون داخلی منزل و ادارات">
+    <meta name="keywords" content="دکوراسیون داخلی , دکوراسیون داخلی منزل , طراحی و تولید دکوراسیون , طراحی دکوراسیون , کاغذ دیواری , پارکت , پرده , مبلمان">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Site Title -->
-    <title> @ViewData["Title"]- دکوراسیون داخلی آنلاین</title>
+    <title> دکوراسیون داخلی - @ViewData["Title"]</title>
 
     <!-- Fav icon -->
-    <link rel="shortcut icon" href="~/assets/images/ecommerce/Favicon.png">
+    <link rel="shortcut icon" href="~/assets/images/ecommerce/favicon.png">
 
     <!-- Font Family-->
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
-    
+
     <!-- Themify icon -->
     <link rel="stylesheet" href="~/assets/css/themify.css">
 
@@ -115,7 +115,7 @@
                                                 <li class="nav-item"><a class="nav-link" href="/Home/AboutUs">درباره</a></li>
                                                 <li class="nav-item"><a class="nav-link" href="/Home/OurService">خدمات</a></li>
                                                 <li class="nav-item"><a class="nav-link" href="/Home/Team">تیم خدمات</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="/Home/ContactUs">تماس با ما</a></li>   
+                                                <li class="nav-item"><a class="nav-link" href="/Home/ContactUs">تماس با ما</a></li>
                                             </ul>
                                         </li>
                                         <li class="mega">
@@ -124,7 +124,7 @@
                                                 <li>
                                                     <div class="container">
                                                         <div class="row">
-                                                           @await Component.InvokeAsync("ShowGroups","Navbar")
+                                                            @await Component.InvokeAsync("ShowGroups","Navbar")
                                                         </div>
                                                     </div>
                                                 </li>
@@ -133,8 +133,8 @@
                                         <li>
                                             <a href="#">وبلاگ</a>
                                             <ul>
-                                                <li class="nav-item"><a class="nav-link" href="blog.html">لیست وبلاگ ها</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="blog-details.html">جزئیات وبلاگ</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="#">لیست وبلاگ ها</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="#">جزئیات وبلاگ</a></li>
                                             </ul>
                                         </li>
                                         <li>
@@ -152,18 +152,6 @@
                                                 </ul>
                                             </li>
                                         }
-                                        @* <li>
-                                            <a href="#">تیم خدمات</a>
-                                            <ul>
-                                                <li class="nav-item"><a class="nav-link" href="single-portfolio.html">نمونه کار تنها</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="portfolio-3-grid.html">نمونه کار - 3 - گرید</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="portfolio-4-grid.html">نمونه کار - 4 - گرید</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="masonary-3-grid.html">مسونری - 3 - گرید</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="masonary-4-grid.html">مسونری - 4 - گرید</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="masonary-fullwidth.html">مسونری - تمام عرض</a></li>
-                                            </ul>
-                                        </li>*@
-
                                     </ul>
                                 </nav>
                             </div>
@@ -181,41 +169,7 @@
                     </div>
                 </div>
             </div>
-
             <!-- Logo & Btn Section End -->
-
-           @* <div class="bottom-header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 ecommerce-sidebar set-order-2">
-                            <button class="btn btn-block btn_inverse toggle-btn">
-                                <i class="fa fa-bars"></i>فروشگاه بر اساس طبقه بندی
-                            </button>
-                        </div>
-                        <div class="col-md-9 set-order-1">
-                            <div class="ecommerce-from">
-                                <div class="input-group">
-                                    <input id="search_input" type="text" class="form-control" placeholder="جستجو محصولات......">
-
-                                    <div class="input-group-append">
-                                        <button id="search_button" class="btn btn_inverse"> جستجو <i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            @if(SignInManager.IsSignedIn(User))
-                            {
-                                <form asp-controller="Account" asp-action="LogOut" method="post">
-                                    <button class="btn btn_white" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i>خروج</button>
-                                </form>
-                            }
-                            else
-                            {
-                            <a class="btn btn_white" href="Account/login"><i class="fa fa-user-o"></i>ورود</a>
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>*@
         </div>
     </div>
     <div>
@@ -336,66 +290,6 @@
         </div>
     </div>
     <!-- Tap on Ends -->
-    <!-- Quick-view modal popup start-->
-    @*<div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content quick-view-modal">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="row">
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="quick-view-img">
-                                <img src="~/assets/images/pro/9.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col-lg-6 rtl-text">
-                            <div class="product-right">
-                                <h2>دریل چکشی</h2>
-                                <h3>32000 تومان</h3>
-                                <div class="border-product">
-                                    <h6 class="product-title">جزئیات محصول</h6>
-                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
-                                </div>
-                                <div class="product-description border-product">
-                                    <div class="size-box">
-                                        <ul>
-                                            <li class="active"><a href="#">s</a></li>
-                                            <li><a href="#">m</a></li>
-                                            <li><a href="#">l</a></li>
-                                            <li><a href="#">xl</a></li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="product-title">مقدار</h6>
-                                    <div class="qty-box">
-                                        <div class="input-group">
-                                            <span class="input-group-prepend">
-                                                <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
-                                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                                </button>
-                                            </span>
-                                            <input type="text" name="quantity" class="form-control input-number" value="1">
-                                            <span class="input-group-prepend">
-                                                <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
-                                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-buttons">
-                                    <a href="#" class="btn btn-solid">سبد خرید</a>
-                                    <a href="#" class="btn btn-solid">نمایش جزئیات</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-    <!-- Quick-view modal popup end-->
     @{
         #endregion
     }

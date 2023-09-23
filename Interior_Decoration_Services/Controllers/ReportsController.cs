@@ -4,7 +4,6 @@ using Interior_Decoration_Services.Enum;
 using Interior_Decoration_Services.Models;
 using Interior_Decoration_Services.Models.View_Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -15,11 +14,10 @@ namespace Interior_Decoration_Services.Controllers
     public class ReportsController : Controller
     {
         private ProjectContext _context;
-        private UserManager<User> _userManager;
-        public ReportsController(ProjectContext context, UserManager<User> userManager)
+        
+        public ReportsController(ProjectContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         [HttpGet]

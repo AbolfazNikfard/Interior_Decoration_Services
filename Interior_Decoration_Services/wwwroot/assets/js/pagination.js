@@ -2,13 +2,14 @@
     const currentUrl = window.location.href;
     const urlObject = new URL(currentUrl);
     const searchParams = urlObject.searchParams;
-    let url, pageParam = "page", limitParam = "limit";
-    let i, selectLimitElementValue;
     const selectLimitElement = document.getElementById("SelectLimitOfPage");
     const ElementThatContainPages = document.getElementById("pagesContainer");
     const currentPageElement = document.getElementById("activePage");
     const currentPageInNumber = parseInt(currentPageElement.innerText);
     const pagesCountInNumber = parseInt(document.getElementById("pagesCount").innerText);
+
+    let url, pageParam = "page", limitParam = "limit";
+    let i, selectLimitElementValue;
 
     if (searchParams.has(limitParam)) {
         let paramValue = searchParams.get(limitParam);
@@ -33,7 +34,9 @@
         const currentUrl = window.location.href;
         const urlObject = new URL(currentUrl);
         const searchParams = urlObject.searchParams;
+
         let aElement;
+
         for (i = 0; i < ElementThatContainPages.childElementCount; i++) {
 
             aElement = ElementThatContainPages.children[i]

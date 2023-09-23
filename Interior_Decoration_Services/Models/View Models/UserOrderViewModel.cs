@@ -16,8 +16,5 @@ namespace Interior_Decoration_Services.Models.View_Models
         public string productMaterial { get; set; }
         public DateTime registerDateTime { get; set; }
         public OrderStatus OrderStat { get; set; }
-        //public bool CompletePurchaseAndPayment { get; set; }
-        // public UnitOFMassMeasurement productWeightUnit { get; set; }
-        // public int productWeight { get; set; }
     }
 }

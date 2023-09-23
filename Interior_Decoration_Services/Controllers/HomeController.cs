@@ -104,23 +104,11 @@ namespace Interior_Decoration_Services.Controllers
         {
             return View();
         }
-        public IActionResult RulesAndConditions()
-        {
-            return View();
-        }
         public IActionResult OurService()
         {
             return View();
         }
         public IActionResult AboutUs()
-        {
-            return View();
-        }
-        public IActionResult Questions()
-        {
-            return View();
-        }
-        public IActionResult Privacy()
         {
             return View();
         }

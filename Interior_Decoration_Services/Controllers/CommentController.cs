@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Interior_Decoration_Services.Controllers
 {
-    [Authorize(Roles ="Buyer")]
+    [Authorize(Roles ="Buyer,Service,Admin")]
     public class CommentController : Controller
     {
         private ProjectContext _context;

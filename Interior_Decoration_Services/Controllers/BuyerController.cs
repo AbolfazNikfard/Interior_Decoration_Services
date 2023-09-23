@@ -24,7 +24,7 @@ namespace Interior_Decoration_Services.Controllers
         {
             return View();
         }
-        #region ProfileAndUpdateIt
+        #region User Profile
         [HttpGet]
         public async Task<IActionResult> Profile(string? message, string? Url)
         {
@@ -100,11 +100,6 @@ namespace Interior_Decoration_Services.Controllers
                     ModelState.AddModelError("", "شماره تماس معتبر نیست");
                     return View(updateUser);
                 }
-                //if (phone == 0)
-                //{
-                //    ModelState.AddModelError("", "شماره تماس را بدون صفر اول وارد کنید");
-                //    return View(updateUser);
-                //}
                 #endregion
                 var user = await _userManager.FindByEmailAsync(User.Identity.Name);
                 if (user == null) { return NotFound(); }
@@ -197,39 +192,10 @@ namespace Interior_Decoration_Services.Controllers
                 Console.WriteLine($"Catched Error: {e.Message}");
                 ModelState.AddModelError("", "مشکلی در سمت سرور پیش آمده است لطفا بعدا مجددا تلاش کنید");
                 return View(model);
-                //return StatusCode(500);
             }
         }
         #endregion
-        public async Task<IActionResult> Order()
-        {
-            try
-            {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                if (user == null) { return NotFound(); }
-
-                var buyer = _context.buyers.SingleOrDefault(b => b.userId == user.Id);
-                if (buyer == null) { return NotFound(); }
-
-                var buyerOrders = _context.orders.Where(o => o.buyerId == buyer.id).Include(p => p.product).IgnoreQueryFilters()
-                    .Select(o => new OrderViewModel
-                    {
-                        productId = o.productId,
-                        productImage = o.product.productImage,
-                        productName = o.product.Name,
-                        //Price = o.Price,
-                        //Number = o.Number,
-                        //orderDate = o.orderDateTime.ToShamsi()
-                    })
-                    .ToList();
-                return View(buyerOrders);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Catched Error: {e.Message}");
-                return StatusCode(500);
-            }
-        }
+        #region Favorites
         public async Task<IActionResult> Favorites()
         {
             try
@@ -242,13 +208,14 @@ namespace Interior_Decoration_Services.Controllers
 
                 var favorites = _context.favorites.Where(f => f.buyerId == buyer.id)
                     .Include(f => f.product)
-                    .Select(f => new Product
+                    .Select(p => new Product
                     {
-                        id = f.product.id,
-                        Name = f.product.Name,
-                        productImage = f.product.productImage,
-                        //Price = f.product.Price,
-                        Stock = f.product.Stock
+                        id = p.product.id,
+                        Name = p.product.Name,
+                        productImage = p.product.productImage,
+                        Price = p.product.Price,
+                        Unit = p.product.Unit,
+                        Stock = p.product.Stock
                     }).ToList();
                 return View(favorites);
             }
@@ -308,5 +275,6 @@ namespace Interior_Decoration_Services.Controllers
                 return StatusCode(500);
             }
         }
+        #endregion
     }
 }

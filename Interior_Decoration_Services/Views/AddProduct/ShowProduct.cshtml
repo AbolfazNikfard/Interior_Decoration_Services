@@ -1,6 +1,6 @@
 ﻿@model ProductDetailViewModel
 @{
-    ViewData["Title"] = "ShowProduct";
+    ViewData["Title"] = "جزییات محصول";
     Layout = "~/Views/Shared/AdminPanel.cshtml";
     //ulong ShowReadablePrice;
 }
@@ -30,12 +30,7 @@
                                                          src="~/assets/images/product-image/@(Model.product.productImage)" alt="عکس محصول">
                                                 </div>
                                             </div>
-                                            @*<div class="single-nav-thumb">
-                                            <div class="single-slide">
-                                            <img class="img-responsive"
-                                            src="~/assets/images/product-image/@(Model.productImage)" alt="عکس محصول">
-                                            </div>
-                                            </div>*@
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -51,10 +46,7 @@
                                             <i class="mdi mdi-star is-rated"></i>
                                             <i class="mdi mdi-star is-rated"></i>
                                         </p>
-                                        @*@{
-                                        ShowReadablePrice = (ulong)Model.product.Price;
-                                        }
-                                        <p class="product-price">قیمت: @ShowReadablePrice.ToMoreReadable() تومان</p>*@
+                                        
                                         <p class="product-sku">شناسه#: @Model.product.id</p>
                                         @if (Model.product.Summary != null)
                                         {

@@ -4,6 +4,5 @@
     {
         public string lable { get; set; }
         public int data { get; set; }
-        //public string filterMessage { get; set; }
     }
 }

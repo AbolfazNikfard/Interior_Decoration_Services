@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="کاپشاپ - داشبورد مدیریتی فروشگاهی اچ تی ام ال">
+    <meta name="description" content="داشبورد مدیریتی">
     @if (User.IsInRole("Service"))
     {
-        <title>کاپشاپ - پنل سرویس کار</title>
+        <title>پنل سرویس کار - @ViewData["Title"]</title>
     }
     else
     {
-        <title>کاپشاپ - پنل ادمین</title>
+        <title>پنل ادمین - @ViewData["Title"]</title>
     }
 
     <!--Data Table-->
@@ -142,7 +142,6 @@
     <script src="~/AdminPanel/assets/plugins/data-tables/datatables.bootstrap5.min.js"></script>
     <script src="~/AdminPanel/assets/plugins/data-tables/datatables.responsive.min.js"></script>
     <!--DataTableJsEnd-->
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>
