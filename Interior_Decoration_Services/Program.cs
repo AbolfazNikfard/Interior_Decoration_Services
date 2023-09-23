@@ -16,7 +16,7 @@ string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRI
 services.AddDbContext<ProjectContext>(options =>
 {
     //"Data Source=DESKTOP-QDE3PR6;Initial Catalog=Interior_Decoration_DB;Trust Server Certificate=True;Integrated Security=False;User ID=sa;Password=1378529"
-    options.UseSqlServer("Data Source=DESKTOP-QDE3PR6;Initial Catalog=Interior_Decoration_DB;Trust Server Certificate=True;Integrated Security=False;User ID=sa;Password=1378529");
+    options.UseSqlServer(connectionString);
 });
 
 

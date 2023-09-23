@@ -74,7 +74,20 @@
                                     </span>
                                     تومان
                                 </h3>
-                                @if (User.IsInRole("Buyer"))
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    @if (User.IsInRole("Buyer"))
+                                    {
+                                        <h6>قبل از ثبت سفارش خود در صورت نیاز در بخش توضیحات سفارش توضیحات لازم(همچون متراژ زمین برای پارکت، تعداد دیوار ها و اندازه برای کاغذ دیواری و ...) را ارائه بفرمایید</h6>
+                                        <div class="product-buttons">
+                                            <button id="addToCart-submit-btn" class="theme_btn">
+                                                ثبت سفارش
+                                                <span class="theme_btn_eff"></span>
+                                            </button>
+                                        </div>
+                                    }
+                                }
+                                else
                                 {
                                     <h6>قبل از ثبت سفارش خود در صورت نیاز در بخش توضیحات سفارش توضیحات لازم(همچون متراژ زمین برای پارکت، تعداد دیوار ها و اندازه برای کاغذ دیواری و ...) را ارائه بفرمایید</h6>
                                     <div class="product-buttons">

@@ -4,6 +4,7 @@ using Interior_Decoration_Services.Models.View_Models;
 using Interior_Decoration_Services.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace Interior_Decoration_Services.Controllers
 {
@@ -33,23 +34,23 @@ namespace Interior_Decoration_Services.Controllers
                 IQueryable<Product> products;
                 if (search != null && filter == "available")
                 {
-                    products = _context.products.Where(p => p.Name.Contains(search) && p.Stock == true);
-                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.Stock == true).Count();
+                    products = _context.products.Where(p => p.Name.Contains(search) && p.Stock == true && p.groupId == groupId);
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.Stock == true && p.groupId == groupId).Count();
                 }
                 else if (search != null && filter == null)
                 {
-                    products = _context.products.Where(p => p.Name.Contains(search));
-                    productCount = (double)_context.products.Where(p => p.Name.Contains(search)).Count();
+                    products = _context.products.Where(p => p.Name.Contains(search) && p.groupId == groupId);
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.groupId == groupId).Count();
                 }
                 else if (search == null && filter != null)
                 {
-                    products = _context.products.Where(p => p.Stock == true);
-                    productCount = (double)_context.products.Where(p => p.Stock == true).Count();
+                    products = _context.products.Where(p => p.Stock == true && p.groupId == groupId);
+                    productCount = (double)_context.products.Where(p => p.Stock == true && p.groupId == groupId).Count();
                 }
                 else
                 {
-                    products = _context.products;
-                    productCount = (double)_context.products.Count();
+                    products = _context.products.Where(p => p.groupId == groupId);
+                    productCount = (double)_context.products.Count(p => p.groupId == groupId);
                 }
 
                 ViewData["page"] = page;
@@ -87,23 +88,23 @@ namespace Interior_Decoration_Services.Controllers
                 IQueryable<Product> products;
                 if (search != null && filter == "available")
                 {
-                    products = _context.products.Where(p => p.Name.Contains(search) && p.Stock == true);
-                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.Stock == true).Count();
+                    products = _context.products.Where(p => p.Name.Contains(search) && p.Stock == true && p.subGroupId == subGroupId);
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.Stock == true && p.subGroupId == subGroupId).Count();
                 }
                 else if (search != null && filter == null)
                 {
-                    products = _context.products.Where(p => p.Name.Contains(search));
-                    productCount = (double)_context.products.Where(p => p.Name.Contains(search)).Count();
+                    products = _context.products.Where(p => p.Name.Contains(search) && p.subGroupId == subGroupId);
+                    productCount = (double)_context.products.Where(p => p.Name.Contains(search) && p.subGroupId == subGroupId).Count();
                 }
                 else if (search == null && filter != null)
                 {
-                    products = _context.products.Where(p => p.Stock == true);
-                    productCount = (double)_context.products.Where(p => p.Stock == true).Count();
+                    products = _context.products.Where(p => p.Stock == true && p.subGroupId == subGroupId);
+                    productCount = (double)_context.products.Where(p => p.Stock == true && p.subGroupId == subGroupId).Count();
                 }
                 else
                 {
-                    products = _context.products;
-                    productCount = (double)_context.products.Count();
+                    products = _context.products.Where(p => p.subGroupId == subGroupId);
+                    productCount = (double)_context.products.Count(p => p.subGroupId == subGroupId);
                 }
 
                 ViewData["page"] = page;
