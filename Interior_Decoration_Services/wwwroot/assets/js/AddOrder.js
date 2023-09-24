@@ -2,8 +2,13 @@
     const closeButton = document.getElementById('closeButton');
     const messageBox = document.getElementById('messageBox');
     const IdentityElement = document.getElementById("UserIdentityName");
-    messageBox.style.Color = "white";
+    const thisUrl = window.location.href;
     const messageBoxText = document.getElementById("message-box-text");
+
+    let returnUrl;
+
+    messageBox.style.Color = "white";
+
     function showMessage() {
         messageBox.classList.add('show');
         setTimeout(hideMessage, 5000);
@@ -19,7 +24,10 @@
             if (IdentityElement.innerText == "") {
                 const currentUrl = window.location.href;
                 const urlObject = new URL(currentUrl);
-                window.location.href = urlObject.origin + "/Account/Login?message=firstLoginToYourAccount";
+
+                returnUrl = thisUrl.replace(urlObject.origin, "");
+
+                window.location.href = urlObject.origin + `/Account/Login?message=firstLoginToYourAccount&returnUrl=${returnUrl}`;
             }
             else {
                 const productIdElement = document.getElementById("productIdSection");

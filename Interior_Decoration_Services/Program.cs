@@ -38,7 +38,6 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseAuthorization();
 Database_Initializer.Seed(app);
 app.MapControllerRoute(
     name: "default",
