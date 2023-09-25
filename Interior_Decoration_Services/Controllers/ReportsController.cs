@@ -4,6 +4,7 @@ using Interior_Decoration_Services.Enum;
 using Interior_Decoration_Services.Models;
 using Interior_Decoration_Services.Models.View_Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -14,12 +15,42 @@ namespace Interior_Decoration_Services.Controllers
     public class ReportsController : Controller
     {
         private ProjectContext _context;
-        
-        public ReportsController(ProjectContext context)
+        private readonly UserManager<User> _userManager;
+
+        public ReportsController(ProjectContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
+        [HttpGet]
+        public IActionResult UserOrders()
+        {
+            return View();
+        }
+        public async Task<IActionResult> UserCertainOrders(string username, int orderprice)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+                return NotFound();
+
+            var buyer = _context.buyers.SingleOrDefault(b => b.userId == user.Id);
+            if (buyer == null)
+                return NotFound();
+
+            var orders = _context.orders.IgnoreQueryFilters()
+            .Include(o => o.product).Where(o => o.buyerId == buyer.id && o.product.Price > orderprice)
+            .Select(o => new UserCertainOrderViewModel
+            {
+                orderId = o.Id,
+                productId = o.productId,
+                productImage = o.product.productImage,
+                productName = o.product.Name,
+                productPrice = o.product.Price,
+                orderDatetime = o.createdAt
+            }).ToList();
+            return View(orders);
+        }
         [HttpGet]
         public async Task<IActionResult> OrderChart(string? orderStatus, string? period)
         {
@@ -169,7 +200,7 @@ namespace Interior_Decoration_Services.Controllers
                    .Select(p => new BarChartViewModel
                    {
                        Lable = ("#" + p.id + " " + p.Name),
-                       Quantity = p.orders.Count(o=>o.Status == OrderStatus.finished)
+                       Quantity = p.orders.Count(o => o.Status == OrderStatus.finished)
                    }).ToList();
 
                 int topSellers;
