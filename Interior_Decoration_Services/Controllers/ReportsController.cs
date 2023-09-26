@@ -4,6 +4,7 @@ using Interior_Decoration_Services.Enum;
 using Interior_Decoration_Services.Models;
 using Interior_Decoration_Services.Models.View_Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,7 @@ namespace Interior_Decoration_Services.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> UserCertainOrders(string username, int orderprice, DateTime startdate, DateTime enddate)
+        public async Task<IActionResult> UserCertainOrders(string username, int orderprice, string startdate, string enddate)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
@@ -37,9 +38,11 @@ namespace Interior_Decoration_Services.Controllers
             var buyer = _context.buyers.SingleOrDefault(b => b.userId == user.Id);
             if (buyer == null)
                 return NotFound();
+            DateTime StartDate = DateTime.Parse(startdate);
+            DateTime EndDate = DateTime.Parse(enddate);
 
             var orders = _context.orders.IgnoreQueryFilters()
-            .Include(o => o.product).Where(o => o.buyerId == buyer.id && o.product.Price > orderprice && (startdate < o.createdAt && o.createdAt < enddate))
+            .Include(o => o.product).Where(o => o.buyerId == buyer.id && o.product.Price > orderprice && (StartDate < o.createdAt && o.createdAt < EndDate))
             .Select(o => new UserCertainOrderViewModel
             {
                 orderId = o.Id,
