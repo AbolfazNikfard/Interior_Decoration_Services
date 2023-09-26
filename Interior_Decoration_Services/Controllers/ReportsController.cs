@@ -28,7 +28,7 @@ namespace Interior_Decoration_Services.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> UserCertainOrders(string username, int orderprice)
+        public async Task<IActionResult> UserCertainOrders(string username, int orderprice, DateTime startdate, DateTime enddate)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
@@ -39,7 +39,7 @@ namespace Interior_Decoration_Services.Controllers
                 return NotFound();
 
             var orders = _context.orders.IgnoreQueryFilters()
-            .Include(o => o.product).Where(o => o.buyerId == buyer.id && o.product.Price > orderprice)
+            .Include(o => o.product).Where(o => o.buyerId == buyer.id && o.product.Price > orderprice && (startdate < o.createdAt && o.createdAt < enddate))
             .Select(o => new UserCertainOrderViewModel
             {
                 orderId = o.Id,
@@ -49,6 +49,7 @@ namespace Interior_Decoration_Services.Controllers
                 productPrice = o.product.Price,
                 orderDatetime = o.createdAt
             }).ToList();
+
             return View(orders);
         }
         [HttpGet]
