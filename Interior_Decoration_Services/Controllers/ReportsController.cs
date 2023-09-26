@@ -29,7 +29,7 @@ namespace Interior_Decoration_Services.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> UserCertainOrders(string username, int orderprice, string startdate, string enddate)
+        public async Task<IActionResult> UserCertainOrders(string username, int? orderprice, string startdate, string enddate)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
@@ -41,17 +41,33 @@ namespace Interior_Decoration_Services.Controllers
             DateTime StartDate = DateTime.Parse(startdate);
             DateTime EndDate = DateTime.Parse(enddate);
 
-            var orders = _context.orders.IgnoreQueryFilters()
-            .Include(o => o.product).Where(o => o.buyerId == buyer.id && o.product.Price > orderprice && (StartDate < o.createdAt && o.createdAt < EndDate))
-            .Select(o => new UserCertainOrderViewModel
-            {
-                orderId = o.Id,
-                productId = o.productId,
-                productImage = o.product.productImage,
-                productName = o.product.Name,
-                productPrice = o.product.Price,
-                orderDatetime = o.createdAt
-            }).ToList();
+            List<UserCertainOrderViewModel> orders;
+
+            if (orderprice != null)
+                orders = _context.orders.IgnoreQueryFilters()
+                .Include(o => o.product).Where(o => o.buyerId == buyer.id && o.product.Price > orderprice && (StartDate < o.createdAt && o.createdAt < EndDate))
+                .Select(o => new UserCertainOrderViewModel
+                {
+                    orderId = o.Id,
+                    productId = o.productId,
+                    productImage = o.product.productImage,
+                    productName = o.product.Name,
+                    productPrice = o.product.Price,
+                    orderDatetime = o.createdAt
+                }).ToList();
+
+            else
+                orders = _context.orders.IgnoreQueryFilters()
+                           .Include(o => o.product).Where(o => o.buyerId == buyer.id && (StartDate < o.createdAt && o.createdAt < EndDate))
+                           .Select(o => new UserCertainOrderViewModel
+                           {
+                               orderId = o.Id,
+                               productId = o.productId,
+                               productImage = o.product.productImage,
+                               productName = o.product.Name,
+                               productPrice = o.product.Price,
+                               orderDatetime = o.createdAt
+                           }).ToList();
 
             return View(orders);
         }
